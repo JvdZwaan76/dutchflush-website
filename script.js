@@ -1,6 +1,7 @@
-// Fireworks background animation (mysterious with blue/purple/gold tones)
-const max_fireworks = 5, max_sparks = 50;
-let canvas = document.getElementById('myCanvas');
+// Adjusted fireworks for space-like particles and smoke-like rising effects
+const max_fireworks = 3; // Less for subtlety
+const max_sparks = 30; // Less sparks for nebula feel
+let canvas = document.getElementById('fireworksCanvas');
 let context = canvas.getContext('2d');
 let fireworks = [];
 
@@ -15,10 +16,10 @@ for (let i = 0; i < max_fireworks; i++) {
     let firework = { sparks: [] };
     for (let n = 0; n < max_sparks; n++) {
         let spark = {
-            vx: Math.random() * 5 + 0.5,
-            vy: Math.random() * 5 + 0.5,
-            weight: Math.random() * 0.3 + 0.03,
-            hue: Math.floor(Math.random() * 60) + 200 // Blues and purples (hue 200-260)
+            vx: Math.random() * 2 + 0.1, // Slower
+            vy: Math.random() * 2 + 0.1,
+            weight: Math.random() * 0.2 + 0.01,
+            hue: Math.floor(Math.random() * 60) + 240 // Purples and blues
         };
         if (Math.random() > 0.5) spark.vx = -spark.vx;
         if (Math.random() > 0.5) spark.vy = -spark.vy;
@@ -41,31 +42,31 @@ function explode() {
     fireworks.forEach((firework) => {
         if (firework.phase === 'explode') {
             firework.sparks.forEach((spark) => {
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 5; i++) { // Less trails for cleaner look
                     let trailAge = firework.age + i;
                     let x = firework.x + spark.vx * trailAge;
-                    let y = firework.y + spark.vy * trailAge + spark.weight * trailAge * spark.weight * trailAge;
-                    let fade = i * 20 - firework.age * 2;
-                    let alpha = fade / 200;
+                    let y = firework.y + spark.vy * trailAge + spark.weight * trailAge * spark.weight * trailAge / 2; // Slower gravity
+                    let fade = i * 10 - firework.age;
+                    let alpha = fade / 100;
                     context.beginPath();
-                    context.fillStyle = `hsla(${spark.hue}, 80%, 50%, ${alpha})`; // Mysterious hues
-                    context.rect(x, y, 4, 4);
+                    context.fillStyle = `hsla(${spark.hue}, 70%, 40%, ${alpha})`; // Softer colors
+                    context.rect(x, y, 3, 3);
                     context.fill();
                 }
             });
             firework.age++;
-            if (firework.age > 100 && Math.random() < 0.05) {
+            if (firework.age > 200 && Math.random() < 0.03) { // Longer life for nebula feel
                 resetFirework(firework);
             }
         } else {
-            firework.y -= 10;
-            for (let spark = 0; spark < 15; spark++) {
+            firework.y -= 5; // Slower rise
+            for (let spark = 0; spark < 10; spark++) { // Less sparks
                 context.beginPath();
-                context.fillStyle = `hsla(${Math.random() * 60 + 200}, 80%, 50%, 1)`;
-                context.rect(firework.x + Math.random() * spark - spark / 2, firework.y + spark * 4, 4, 4);
+                context.fillStyle = `hsla(${Math.random() * 60 + 240}, 70%, 40%, 0.5)`;
+                context.rect(firework.x + Math.random() * spark - spark / 2, firework.y + spark * 2, 3, 3);
                 context.fill();
             }
-            if (Math.random() < 0.001 || firework.y < 200) firework.phase = 'explode';
+            if (Math.random() < 0.001 || firework.y < 300) firework.phase = 'explode';
         }
     });
     window.requestAnimationFrame(explode);
