@@ -1,11 +1,13 @@
-// Enhanced animated space effects with moving stars, nebulae, and light bursts
+// Enhanced animated space effects with moving stars, nebulae, light bursts, and cosmic dust
 const canvas = document.getElementById('spaceCanvas');
 const ctx = canvas.getContext('2d');
 let stars = [];
-const starCount = 150; // Increased for more space-like density
+const starCount = 200; // Increased for more density
 let nebulae = [];
-const nebulaCount = 5; // Increased for richer background
+const nebulaCount = 6; // Increased for richer effect
 let lightBursts = [];
+let cosmicDust = [];
+const dustCount = 100; // New cosmic dust effect
 
 function initCanvas() {
     canvas.width = window.innerWidth;
@@ -20,7 +22,7 @@ for (let i = 0; i < starCount; i++) {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 1.5 + 0.5,
-        speed: Math.random() * 0.3 + 0.1,
+        speed: Math.random() * 0.4 + 0.1,
         opacity: Math.random() * 0.7 + 0.2
     });
 }
@@ -30,10 +32,22 @@ for (let i = 0; i < nebulaCount; i++) {
     nebulae.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 200 + 150,
+        radius: Math.random() * 250 + 200,
         hue: Math.floor(Math.random() * 30) + 200,
-        opacity: Math.random() * 0.4 + 0.1,
+        opacity: Math.random() * 0.5 + 0.1,
         speed: Math.random() * 0.05 - 0.025
+    });
+}
+
+// Create cosmic dust
+for (let i = 0; i < dustCount; i++) {
+    cosmicDust.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 0.8 + 0.2,
+        speedX: (Math.random() - 0.5) * 0.2,
+        speedY: (Math.random() - 0.5) * 0.2,
+        opacity: Math.random() * 0.3 + 0.1
     });
 }
 
@@ -43,7 +57,7 @@ function createLightBurst() {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: 0,
-        maxRadius: Math.random() * 100 + 50,
+        maxRadius: Math.random() * 120 + 60,
         opacity: 0.6
     };
 }
@@ -60,9 +74,8 @@ function animate() {
         ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
 
-        // Twinkling effect
         if (Math.random() < 0.01) {
-            star.opacity = Math.random() * 0.7 + 0.2;
+            star.opacity = Math.random() * 0.7 + 0.2; // Twinkling effect
         }
     });
 
@@ -79,6 +92,18 @@ function animate() {
         ctx.fill();
     });
 
+    // Animate cosmic dust
+    cosmicDust.forEach((dust) => {
+        dust.x += dust.speedX;
+        dust.y += dust.speedY;
+        if (dust.x < 0 || dust.x > canvas.width) dust.speedX *= -1;
+        if (dust.y < 0 || dust.y > canvas.height) dust.speedY *= -1;
+        ctx.beginPath();
+        ctx.arc(dust.x, dust.y, dust.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(209, 196, 233, ${dust.opacity})`; // Lavender dust
+        ctx.fill();
+    });
+
     // Animate light bursts
     lightBursts = lightBursts.filter(burst => burst.opacity > 0);
     lightBursts.forEach((burst, index) => {
@@ -87,7 +112,7 @@ function animate() {
         ctx.fillStyle = `rgba(255, 215, 0, ${burst.opacity})`; // Subtle gold
         ctx.fill();
 
-        burst.radius += 1;
+        burst.radius += 1.2;
         burst.opacity -= 0.008;
 
         if (burst.radius > burst.maxRadius) {
@@ -96,7 +121,7 @@ function animate() {
     });
 
     // Randomly spawn new light bursts
-    if (Math.random() < 0.01) {
+    if (Math.random() < 0.008) {
         lightBursts.push(createLightBurst());
     }
 
