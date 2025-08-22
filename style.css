@@ -334,14 +334,70 @@ h1 {
     cursor: pointer;
 }
 
-.current-times {
+.globe-wrapper {
+    position: relative;
     margin-top: 20px;
+    height: 250px; /* Adjust for globe size */
+}
+
+#earth {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: url('https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg') 0 0 repeat-x / 400px 200px;
+    border-radius: 50%;
+    animation: rotate 20s linear infinite;
+    box-shadow: inset 10px 0 40px 3px rgba(0, 0, 0, 0.8);
+    transform-style: preserve-3d;
+    z-index: 0;
+}
+
+#earth:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: -40px 7px 40px 5px rgba(0,0,0,.8) inset;
+}
+
+#earth:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50px 50px, #fff, #000);
+    opacity: .15;
+}
+
+@keyframes rotate {
+    0% { background-position: 0 0; }
+    100% { background-position: 400px 0; }
+}
+
+.current-times {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .current-times p {
     margin: 5px 0;
     font-size: 0.9em;
     opacity: 0.8;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* For readability over globe */
 }
 
 @media (min-width: 601px) {
@@ -395,6 +451,31 @@ h1 {
 
     .contact {
         margin-top: 30px;
+    }
+
+    .globe-wrapper {
+        height: 350px;
+    }
+
+    #earth {
+        width: 300px;
+        height: 300px;
+        background-size: 600px 300px;
+        box-shadow: inset 20px 0 80px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    #earth:after {
+        box-shadow: -60px 10px 60px 8px rgba(0,0,0,.8) inset;
+    }
+
+    #earth:before {
+        background: radial-gradient(circle at 100px 100px, #fff, #000);
+        opacity: .2;
+    }
+
+    @keyframes rotate {
+        0% { background-position: 0 0; }
+        100% { background-position: 600px 0; }
     }
 
     .current-times p {
