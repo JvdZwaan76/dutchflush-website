@@ -19,15 +19,16 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 50%), 
-                radial-gradient(circle at 80% 70%, rgba(187, 134, 252, 0.05) 0%, transparent 60%);
-    opacity: 0.9;
-    animation: spacePulse 15s infinite alternate;
+    background: radial-gradient(circle at 15% 25%, rgba(255, 215, 0, 0.02) 0%, transparent 40%), 
+                radial-gradient(circle at 75% 75%, rgba(187, 134, 252, 0.03) 0%, transparent 50%), 
+                radial-gradient(circle at 30% 70%, rgba(0, 191, 255, 0.02) 0%, transparent 60%);
+    animation: spaceShift 20s infinite linear;
 }
 
-@keyframes spacePulse {
-    from { opacity: 0.8; }
-    to { opacity: 1; }
+@keyframes spaceShift {
+    0% { background-position: 0 0; }
+    50% { background-position: 100px 50px; }
+    100% { background-position: 0 0; }
 }
 
 .smoke-layer {
@@ -41,25 +42,25 @@ body {
 
 .smoke-particle {
     position: absolute;
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle, rgba(209, 196, 233, 0.1), transparent);
-    filter: blur(15px);
-    animation: smokeRise 25s infinite linear;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(209, 196, 233, 0.12), transparent);
+    filter: blur(20px);
+    animation: smokeRise 30s infinite linear;
 }
 
 .smoke-particle:nth-child(1) { left: 5%; bottom: -10%; animation-delay: 0s; }
-.smoke-particle:nth-child(2) { left: 20%; bottom: -15%; animation-delay: 5s; }
-.smoke-particle:nth-child(3) { left: 40%; bottom: -20%; animation-delay: 10s; }
-.smoke-particle:nth-child(4) { left: 60%; bottom: -25%; animation-delay: 3s; }
-.smoke-particle:nth-child(5) { left: 75%; bottom: -30%; animation-delay: 8s; }
-.smoke-particle:nth-child(6) { left: 90%; bottom: -15%; animation-delay: 13s; }
-.smoke-particle:nth-child(7) { left: 30%; bottom: -35%; animation-delay: 18s; }
-.smoke-particle:nth-child(8) { left: 70%; bottom: -40%; animation-delay: 23s; }
+.smoke-particle:nth-child(2) { left: 20%; bottom: -15%; animation-delay: 4s; }
+.smoke-particle:nth-child(3) { left: 35%; bottom: -20%; animation-delay: 8s; }
+.smoke-particle:nth-child(4) { left: 50%; bottom: -25%; animation-delay: 12s; }
+.smoke-particle:nth-child(5) { left: 65%; bottom: -30%; animation-delay: 16s; }
+.smoke-particle:nth-child(6) { left: 80%; bottom: -35%; animation-delay: 20s; }
+.smoke-particle:nth-child(7) { left: 90%; bottom: -40%; animation-delay: 24s; }
+.smoke-particle:nth-child(8) { left: 15%; bottom: -45%; animation-delay: 28s; }
 
 @keyframes smokeRise {
-    0% { transform: translateY(100vh) scale(0.7); opacity: 0.4; }
-    100% { transform: translateY(-50vh) scale(2.5); opacity: 0; }
+    0% { transform: translateY(100vh) scale(0.6); opacity: 0.5; }
+    100% { transform: translateY(-60vh) scale(3); opacity: 0; }
 }
 
 #spaceCanvas {
@@ -67,7 +68,7 @@ body {
     top: 0;
     left: 0;
     z-index: -1;
-    opacity: 0.7;
+    opacity: 0.8;
     pointer-events: none;
 }
 
@@ -200,7 +201,7 @@ h1 {
     100% { transform: rotateX(0deg); z-index: 2; }
 }
 
-.invite-btn, .beta-btn {
+.invite-btn {
     background: transparent;
     border: 1px solid #fff;
     color: #fff;
@@ -214,19 +215,13 @@ h1 {
     letter-spacing: 1px;
 }
 
-.invite-btn:hover, .beta-btn:hover {
+.invite-btn:hover {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
 }
 
 .or {
     margin: 10px 0;
-    opacity: 0.7;
-    font-size: 0.9em;
-}
-
-.account {
-    margin-bottom: 10px;
     opacity: 0.7;
     font-size: 0.9em;
 }
@@ -242,5 +237,5 @@ h1 {
     .container { padding: 30px; }
     .card { width: 50px; height: 70px; font-size: 2em; line-height: 70px; }
     .flip-clock__slot { bottom: -22px; font-size: 0.9em; }
-    .invite-btn, .beta-btn { padding: 10px 20px; font-size: 1em; }
+    .invite-btn { padding: 10px 20px; font-size: 1em; }
 }
