@@ -198,7 +198,7 @@ function Clock(countdown, callback) {
     setTimeout(updateClock, 500);
 }
 
-// Set deadline to one year from today (August 21, 2025, 09:30 PM PDT)
-var today = new Date('2025-08-21T21:30:00-07:00');
+// Set deadline to one year from today (August 21, 2025, 09:34 PM PDT)
+var today = new Date('2025-08-21T21:34:00-07:00');
 var deadline = new Date(today.getTime() + 365 * 24 * 60 * 60 * 1000); // One year from now
 var c = new Clock(deadline, function() { console.log('Countdown complete'); });
