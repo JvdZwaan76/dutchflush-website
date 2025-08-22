@@ -130,7 +130,7 @@ function animate() {
 
 animate();
 
-// Flip countdown timer (using existing logic, excluding Hours label)
+// Flip countdown timer with downward flipping
 function CountdownTracker(label, value) {
     var el = document.createElement('span');
     el.className = 'flip-clock__piece';
@@ -198,5 +198,7 @@ function Clock(countdown, callback) {
     setTimeout(updateClock, 500);
 }
 
-var deadline = new Date('2026-08-21T00:00:00-07:00'); // Launch date
+// Set deadline to one year from today (August 21, 2025, 09:30 PM PDT)
+var today = new Date('2025-08-21T21:30:00-07:00');
+var deadline = new Date(today.getTime() + 365 * 24 * 60 * 60 * 1000); // One year from now
 var c = new Clock(deadline, function() { console.log('Countdown complete'); });
