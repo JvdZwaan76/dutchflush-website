@@ -1,9 +1,6 @@
-// Subtle fireworks for a mysterious, elegant ambiance
-const max_fireworks = 2; // Minimal for class
-const max_sparks = 15; // Fewer sparks for sophistication
-let canvas = document.getElementById('fireworksCanvas');
-let context = canvas.getContext('2d');
-let fireworks = [];
+// Subtle light effects for mysterious ambiance
+const canvas = document.getElementById('lightCanvas');
+const ctx = canvas.getContext('2d');
 
 function initCanvas() {
     canvas.width = window.innerWidth;
@@ -12,65 +9,21 @@ function initCanvas() {
 initCanvas();
 window.addEventListener('resize', initCanvas);
 
-for (let i = 0; i < max_fireworks; i++) {
-    let firework = { sparks: [] };
-    for (let n = 0; n < max_sparks; n++) {
-        let spark = {
-            vx: Math.random() * 1.2 + 0.1,
-            vy: Math.random() * 1.2 + 0.1,
-            weight: Math.random() * 0.1 + 0.01,
-            hue: Math.floor(Math.random() * 20) + 250 // Deep purples
-        };
-        if (Math.random() > 0.5) spark.vx = -spark.vx;
-        if (Math.random() > 0.5) spark.vy = -spark.vy;
-        firework.sparks.push(spark);
+function drawLightBeams() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+    for (let i = 0; i < 5; i++) {
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
+        let radius = Math.random() * 100 + 50;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx.fill();
     }
-    fireworks.push(firework);
-    resetFirework(firework);
-}
-window.requestAnimationFrame(explode);
-
-function resetFirework(firework) {
-    firework.x = Math.floor(Math.random() * canvas.width);
-    firework.y = canvas.height;
-    firework.age = 0;
-    firework.phase = 'fly';
+    requestAnimationFrame(drawLightBeams);
 }
 
-function explode() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    fireworks.forEach((firework) => {
-        if (firework.phase === 'explode') {
-            firework.sparks.forEach((spark) => {
-                for (let i = 0; i < 2; i++) {
-                    let trailAge = firework.age + i;
-                    let x = firework.x + spark.vx * trailAge;
-                    let y = firework.y + spark.vy * trailAge + spark.weight * trailAge * spark.weight * trailAge / 4;
-                    let fade = i * 6 - firework.age;
-                    let alpha = fade / 60;
-                    context.beginPath();
-                    context.fillStyle = `hsla(${spark.hue}, 50%, 25%, ${alpha})`; // Deep, subtle purple
-                    context.arc(x, y, 1.5, 0, Math.PI * 2);
-                    context.fill();
-                }
-            });
-            firework.age++;
-            if (firework.age > 180 && Math.random() < 0.015) {
-                resetFirework(firework);
-            }
-        } else {
-            firework.y -= 2;
-            for (let spark = 0; spark < 3; spark++) {
-                context.beginPath();
-                context.fillStyle = `hsla(${Math.random() * 20 + 250}, 50%, 25%, 0.2)`;
-                context.arc(firework.x + Math.random() * spark - spark / 2, firework.y + spark, 1.5, 0, Math.PI * 2);
-                context.fill();
-            }
-            if (Math.random() < 0.0006 || firework.y < 500) firework.phase = 'explode';
-        }
-    });
-    window.requestAnimationFrame(explode);
-}
+drawLightBeams();
 
 // Flip countdown timer
 function CountdownTracker(label, value) {
@@ -140,5 +93,5 @@ function Clock(countdown, callback) {
     setTimeout(updateClock, 500);
 }
 
-var deadline = new Date('2026-08-21T00:00:00-07:00'); // Specific launch date
+var deadline = new Date(Date.parse(new Date()) + 365 * 24 * 60 * 60 * 1000);
 var c = new Clock(deadline, function() { console.log('Countdown complete'); });
