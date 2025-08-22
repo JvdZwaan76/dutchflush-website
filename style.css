@@ -75,8 +75,8 @@ body {
 .container {
     position: relative;
     z-index: 1;
-    max-width: 600px;
-    padding: 50px;
+    max-width: 100%;
+    padding: 30px;
     background: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -91,50 +91,59 @@ body {
 
 h1 {
     font-family: 'Pacifico', cursive;
-    font-size: 4.5em;
-    margin-bottom: 30px;
+    font-size: 3.5em;
+    margin-bottom: 20px;
     font-weight: 400;
     color: #ff6600;
+    -webkit-text-stroke: 0.5px #fff; /* Tubular outline */
+    text-stroke: 0.5px #fff; /* Fallback */
     text-shadow: 
-        0 0 4px #fff, 
+        0 0 2px #fff, 
+        0 0 5px #ff6600,
         0 0 10px #ff6600,
         0 0 20px #ff6600,
         0 0 40px #ff4500, 
         0 0 60px #ff4500,
-        0 0 80px #ff4500;
-    animation: neonFlicker 3s infinite ease-in-out;
+        0 0 80px #ff4500,
+        0 0 100px #ff4500;
+    animation: neonGlow 3s infinite ease-in-out;
     letter-spacing: 0.02em;
 }
 
-@keyframes neonFlicker {
+@keyframes neonGlow {
     0%, 40%, 42%, 44%, 80%, 82%, 100% {
         text-shadow: 
-            0 0 4px #fff,
+            0 0 2px #fff, 
+            0 0 5px #ff6600,
             0 0 10px #ff6600,
             0 0 20px #ff6600,
-            0 0 40px #ff4500,
+            0 0 40px #ff4500, 
             0 0 60px #ff4500,
-            0 0 80px #ff4500;
+            0 0 80px #ff4500,
+            0 0 100px #ff4500;
     }
     41%, 43%, 81% {
         text-shadow: 
-            0 0 2px #fff,
-            0 0 5px #ff6600,
-            0 0 10px #ff6600,
-            0 0 20px #ff4500,
-            0 0 30px #ff4500,
-            0 0 40px #ff4500;
-        opacity: 0.9;
+            0 0 1px #fff,
+            0 0 3px #ff6600,
+            0 0 6px #ff6600,
+            0 0 12px #ff6600,
+            0 0 24px #ff4500,
+            0 0 36px #ff4500,
+            0 0 48px #ff4500,
+            0 0 60px #ff4500;
+        opacity: 0.95;
     }
 }
 
 .flip-clock {
     text-align: center;
     perspective: 1000px;
-    margin: 30px auto;
+    margin: 20px auto;
     display: flex;
     justify-content: center;
     gap: 5px;
+    flex-wrap: wrap; /* For better mobile flow if needed */
 }
 
 .flip-clock__piece {
@@ -146,11 +155,11 @@ h1 {
 }
 
 .flip-clock__slot {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: #fff;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
     position: absolute;
-    bottom: -20px;
+    bottom: -18px;
     left: 50%;
     transform: translateX(-50%);
     font-weight: 500;
@@ -161,10 +170,10 @@ h1 {
 .card {
     display: block;
     position: relative;
-    width: 70px;
-    height: 90px;
-    font-size: 2.8em;
-    line-height: 90px;
+    width: 60px;
+    height: 80px;
+    font-size: 2.2em;
+    line-height: 80px;
     perspective: 1000px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 5px;
@@ -242,8 +251,8 @@ h1 {
 }
 
 .colon {
-    font-size: 2.8em;
-    line-height: 90px;
+    font-size: 2.2em;
+    line-height: 80px;
     color: #fff;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
     margin: 0 5px;
@@ -253,12 +262,12 @@ h1 {
     background: transparent;
     border: 2px solid #fff;
     color: #fff;
-    padding: 12px 30px;
-    margin: 20px 0;
+    padding: 10px 20px;
+    margin: 15px 0;
     border-radius: 8px;
     cursor: pointer;
     transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
-    font-size: 1.2em;
+    font-size: 1em;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     text-decoration: none;
@@ -272,16 +281,51 @@ h1 {
 }
 
 .contact {
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 1em;
     opacity: 0.8;
 }
 
-@media (max-width: 600px) {
-    h1 { font-size: 3.5em; }
-    .container { padding: 30px; }
-    .card { width: 60px; height: 80px; font-size: 2.2em; line-height: 80px; }
-    .flip-clock__slot { bottom: -18px; font-size: 0.8em; }
-    .invite-btn { padding: 10px 20px; font-size: 1em; margin: 15px 0; }
-    .colon { font-size: 2.2em; line-height: 80px; }
+@media (min-width: 601px) {
+    .container {
+        max-width: 600px;
+        padding: 50px;
+    }
+
+    h1 {
+        font-size: 5em;
+        margin-bottom: 30px;
+    }
+
+    .flip-clock {
+        margin: 30px auto;
+        flex-wrap: nowrap;
+    }
+
+    .flip-clock__slot {
+        font-size: 0.9em;
+        bottom: -20px;
+    }
+
+    .card {
+        width: 70px;
+        height: 90px;
+        font-size: 2.8em;
+        line-height: 90px;
+    }
+
+    .colon {
+        font-size: 2.8em;
+        line-height: 90px;
+    }
+
+    .invite-btn {
+        padding: 12px 30px;
+        margin: 20px 0;
+        font-size: 1.2em;
+    }
+
+    .contact {
+        margin-top: 30px;
+    }
 }
