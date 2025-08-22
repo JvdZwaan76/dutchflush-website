@@ -1,75 +1,64 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Georgia', serif; /* Classy serif font */
+    font-family: 'Playfair Display', serif; /* Elegant serif font */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to bottom, #1a0033, #0d0019); /* Deep space gradient */
-    color: #d1c4e9; /* Soft lavender for elegance */
+    background: linear-gradient(135deg, #0d0019, #1a0033, #2a004d); /* Deep cosmic gradient */
+    color: #d1c4e9; /* Soft lavender for mystery */
     text-align: center;
     overflow: hidden;
     position: relative;
 }
 
-.stars {
+.cosmic-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: transparent;
-    box-shadow: 
-        150px 120px 1px #fff,
-        300px 250px 1px #fff,
-        450px 180px 1px #fff,
-        600px 320px 1px #fff,
-        750px 90px 1px #fff,
-        900px 400px 1px #fff;
-    animation: subtleTwinkle 5s infinite alternate;
-    opacity: 0.3;
+    background: radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 70%), /* Subtle star glow */
+                 radial-gradient(circle at 80% 70%, rgba(187, 134, 252, 0.1) 0%, transparent 60%); /* Nebula hint */
+    opacity: 0.8;
+    animation: cosmicPulse 10s infinite alternate;
 }
 
-@keyframes subtleTwinkle {
-    from { opacity: 0.2; }
-    to { opacity: 0.4; }
+@keyframes cosmicPulse {
+    from { opacity: 0.7; }
+    to { opacity: 0.9; }
 }
 
-.smoke {
+.smoke-layer {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
+    overflow: hidden;
 }
 
-.particle {
+.smoke-particle {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    background: rgba(209, 196, 233, 0.1); /* Matching lavender */
+    width: 40px;
+    height: 40px;
+    background: rgba(209, 196, 233, 0.08); /* Faint lavender smoke */
     border-radius: 50%;
-    filter: blur(8px);
-    animation: smokeRise 15s infinite linear;
+    filter: blur(10px);
+    animation: smokeDrift 20s infinite linear;
 }
 
-.particle:nth-child(1) { left: 15%; animation-delay: 0s; animation-duration: 18s; }
-.particle:nth-child(2) { left: 35%; animation-delay: 3s; animation-duration: 20s; }
-.particle:nth-child(3) { left: 55%; animation-delay: 6s; animation-duration: 17s; }
-.particle:nth-child(4) { left: 75%; animation-delay: 2s; animation-duration: 19s; }
-.particle:nth-child(5) { left: 90%; animation-delay: 4s; animation-duration: 16s; }
+.smoke-particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.smoke-particle:nth-child(2) { left: 30%; animation-delay: 5s; }
+.smoke-particle:nth-child(3) { left: 50%; animation-delay: 10s; }
+.smoke-particle:nth-child(4) { left: 70%; animation-delay: 3s; }
+.smoke-particle:nth-child(5) { left: 90%; animation-delay: 7s; }
 
-@keyframes smokeRise {
-    0% {
-        transform: translateY(0) scale(0.8);
-        opacity: 0.3;
-    }
-    100% {
-        transform: translateY(-80vh) scale(2);
-        opacity: 0;
-    }
+@keyframes smokeDrift {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0.3; }
+    100% { transform: translateY(-50vh) scale(2); opacity: 0; }
 }
 
 #fireworksCanvas {
@@ -77,61 +66,71 @@ body {
     top: 0;
     left: 0;
     z-index: -1;
-    opacity: 0.5; /* Subtle fireworks */
+    opacity: 0.6; /* Subtle fireworks */
 }
 
 .container {
     position: relative;
     z-index: 1;
-    max-width: 500px;
-    padding: 30px;
-    background: rgba(26, 0, 51, 0.4); /* Darker glass effect */
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(209, 196, 233, 0.2);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
-    animation: gentlePulse 4s ease-in-out infinite alternate;
+    max-width: 550px;
+    padding: 35px;
+    background: rgba(26, 0, 51, 0.5); /* Dark glass effect */
+    border-radius: 25px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(209, 196, 233, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(187, 134, 252, 0.2);
+    animation: subtleGlow 6s ease-in-out infinite alternate;
 }
 
 h1 {
-    font-size: 3em;
-    color: #bb86fc; /* Elegant purple hue */
-    text-shadow: 0 0 8px rgba(187, 134, 252, 0.7);
+    font-size: 3.2em;
+    color: #bb86fc; /* Rich purple for class */
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.6), 0 0 20px rgba(187, 134, 252, 0.3);
     margin-bottom: 15px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 p {
-    font-size: 1.2em;
+    font-size: 1.3em;
     margin: 8px 0;
-    opacity: 0.85;
-    text-shadow: 0 0 5px rgba(209, 196, 233, 0.5);
+    opacity: 0.9;
+    text-shadow: 0 0 8px rgba(209, 196, 233, 0.4);
 }
 
 .contact {
     margin-top: 25px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     color: #cfcfcf;
-    text-shadow: 0 0 5px rgba(209, 196, 233, 0.3);
+    text-shadow: 0 0 8px rgba(209, 196, 233, 0.2);
+}
+
+.contact a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact a:hover {
+    color: #bb86fc;
 }
 
 .flip-clock {
     text-align: center;
-    perspective: 600px;
-    margin: 15px auto;
+    perspective: 700px;
+    margin: 20px auto;
 }
 
 .flip-clock__piece {
     display: inline-block;
-    margin: 0 4px;
+    margin: 0 6px;
 }
 
 .flip-clock__slot {
-    font-size: 0.9em;
+    font-size: 0.95em;
     color: #bb86fc;
-    text-shadow: 0 0 5px rgba(187, 134, 252, 0.5);
+    text-shadow: 0 0 8px rgba(187, 134, 252, 0.4);
     position: absolute;
-    bottom: -20px;
+    bottom: -22px;
     left: 50%;
     transform: translateX(-50%);
     font-weight: 500;
@@ -140,11 +139,11 @@ p {
 .card {
     display: block;
     position: relative;
-    width: 50px;
-    height: 70px;
-    font-size: 2em;
-    line-height: 70px;
-    perspective: 600px;
+    width: 55px;
+    height: 75px;
+    font-size: 2.2em;
+    line-height: 75px;
+    perspective: 700px;
 }
 
 .card__top, .card__bottom, .card__back::before, .card__back::after {
@@ -154,10 +153,10 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(26, 0, 51, 0.8);
+    background: rgba(26, 0, 51, 0.9);
     color: #bb86fc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(187, 134, 252, 0.3);
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(187, 134, 252, 0.2);
     backface-visibility: hidden;
     transform-style: preserve-3d;
     font-weight: 600;
@@ -166,13 +165,13 @@ p {
 .card__top {
     top: 0;
     border-bottom: 1px solid rgba(209, 196, 233, 0.1);
-    border-radius: 5px 5px 0 0;
+    border-radius: 6px 6px 0 0;
 }
 
 .card__bottom {
     bottom: 0;
     border-top: 1px solid rgba(209, 196, 233, 0.1);
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 6px 6px;
     overflow: hidden;
 }
 
@@ -188,7 +187,7 @@ p {
     top: 0;
     width: 100%;
     height: 50%;
-    border-radius: 5px 5px 0 0;
+    border-radius: 6px 6px 0 0;
     transform-origin: bottom;
 }
 
@@ -199,11 +198,11 @@ p {
 }
 
 .flip .card__back::before {
-    animation: flipTop 0.4s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+    animation: flipTop 0.5s ease-out forwards;
 }
 
 .flip .card__back .card__bottom {
-    animation: flipBottom 0.4s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+    animation: flipBottom 0.5s ease-out forwards;
 }
 
 @keyframes flipTop {
@@ -216,15 +215,15 @@ p {
     100% { transform: rotateX(0deg); z-index: 2; }
 }
 
-@keyframes gentlePulse {
-    from { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); }
-    to { box-shadow: 0 7px 20px rgba(0, 0, 0, 0.8); }
+@keyframes subtleGlow {
+    from { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(187, 134, 252, 0.2); }
+    to { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(187, 134, 252, 0.3); }
 }
 
 @media (max-width: 600px) {
-    h1 { font-size: 2.2em; }
-    p { font-size: 1em; }
-    .container { padding: 20px; }
-    .card { width: 40px; height: 60px; font-size: 1.6em; line-height: 60px; }
-    .flip-clock__slot { bottom: -18px; font-size: 0.8em; }
+    h1 { font-size: 2.5em; }
+    p { font-size: 1.1em; }
+    .container { padding: 25px; }
+    .card { width: 45px; height: 65px; font-size: 1.8em; line-height: 65px; }
+    .flip-clock__slot { bottom: -20px; font-size: 0.85em; }
 }
