@@ -2,9 +2,9 @@
 const canvas = document.getElementById('spaceCanvas');
 const ctx = canvas.getContext('2d');
 let stars = [];
-const starCount = 100;
+const starCount = 150; // Increased for more space-like density
 let nebulae = [];
-const nebulaCount = 3;
+const nebulaCount = 5; // Increased for richer background
 let lightBursts = [];
 
 function initCanvas() {
@@ -20,8 +20,8 @@ for (let i = 0; i < starCount; i++) {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 1.5 + 0.5,
-        speed: Math.random() * 0.2 + 0.1,
-        opacity: Math.random() * 0.6 + 0.2
+        speed: Math.random() * 0.3 + 0.1,
+        opacity: Math.random() * 0.7 + 0.2
     });
 }
 
@@ -30,9 +30,10 @@ for (let i = 0; i < nebulaCount; i++) {
     nebulae.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 150 + 100,
+        radius: Math.random() * 200 + 150,
         hue: Math.floor(Math.random() * 30) + 200,
-        opacity: Math.random() * 0.3 + 0.1
+        opacity: Math.random() * 0.4 + 0.1,
+        speed: Math.random() * 0.05 - 0.025
     });
 }
 
@@ -42,8 +43,8 @@ function createLightBurst() {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: 0,
-        maxRadius: Math.random() * 80 + 40,
-        opacity: 0.7
+        maxRadius: Math.random() * 100 + 50,
+        opacity: 0.6
     };
 }
 
@@ -58,10 +59,17 @@ function animate() {
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
+
+        // Twinkling effect
+        if (Math.random() < 0.01) {
+            star.opacity = Math.random() * 0.7 + 0.2;
+        }
     });
 
-    // Animate nebulae
+    // Animate nebulae with slight movement
     nebulae.forEach((nebula) => {
+        nebula.x += nebula.speed;
+        if (nebula.x < 0 || nebula.x > canvas.width) nebula.speed *= -1;
         const gradient = ctx.createRadialGradient(nebula.x, nebula.y, 0, nebula.x, nebula.y, nebula.radius);
         gradient.addColorStop(0, `hsla(${nebula.hue}, 70%, 30%, ${nebula.opacity})`);
         gradient.addColorStop(1, 'transparent');
@@ -79,8 +87,8 @@ function animate() {
         ctx.fillStyle = `rgba(255, 215, 0, ${burst.opacity})`; // Subtle gold
         ctx.fill();
 
-        burst.radius += 0.8;
-        burst.opacity -= 0.007;
+        burst.radius += 1;
+        burst.opacity -= 0.008;
 
         if (burst.radius > burst.maxRadius) {
             lightBursts.splice(index, 1);
@@ -88,7 +96,7 @@ function animate() {
     });
 
     // Randomly spawn new light bursts
-    if (Math.random() < 0.015) {
+    if (Math.random() < 0.01) {
         lightBursts.push(createLightBurst());
     }
 
