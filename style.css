@@ -17,135 +17,103 @@ body {
     left: 0;
     z-index: -1; /* Behind content */
 }
-.container {
+.cylinder {
     position: relative;
     z-index: 1;
-    max-width: 800px;
-    padding: 40px;
-    background: rgba(10, 10, 26, 0.3); /* Darker glassmorphic for mystery */
-    border-radius: 20px;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+.top-cap {
+    width: 300px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 150px 150px 0 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateX(15deg);
+}
+.body {
+    width: 300px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.2); /* Enhanced glow */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: none;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 215, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transform: rotateX(15deg);
+    border-radius: 0 0 150px 150px;
     animation: glowPulse 3s ease-in-out infinite alternate;
 }
 h1 {
-    font-size: 4em;
-    margin-bottom: 20px;
-    color: #ffd700; /* Gold for sophistication */
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4); /* Intense glow */
+    font-size: 3em;
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
     letter-spacing: 2px;
 }
 p {
-    font-size: 1.5em;
-    margin: 10px 0;
+    font-size: 1.3em;
     opacity: 0.95;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 .contact {
-    margin-top: 30px;
-    font-size: 1.3em;
+    margin-top: 20px;
+    font-size: 1.2em;
     color: #e0e0e0;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
-/* Improved flip clock styling: Sophisticated, mysterious with neon glow */
+/* Flip clock styling adjusted for top cap */
 .flip-clock {
-    text-align: center;
+    transform: scale(0.8); /* Small for top */
     perspective: 800px;
-    margin: 20px auto;
 }
 .flip-clock__piece {
-    display: inline-block;
-    margin: 0 10px;
-    position: relative;
+    margin: 0 5px;
 }
 .flip-clock__slot {
-    font-size: 1em;
+    font-size: 0.8em;
     color: #ffd700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
     position: absolute;
-    bottom: -30px;
+    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 .card {
-    display: block;
-    position: relative;
-    width: 80px;
-    height: 100px;
-    font-size: 3em;
-    line-height: 100px;
-    perspective: 800px;
+    width: 40px;
+    height: 50px;
+    font-size: 1.5em;
+    line-height: 50px;
 }
 .card__top, .card__bottom, .card__back::before, .card__back::after {
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(180deg, #1a1a2e, #0f0f1f); /* Mysterious dark gradient */
+    height: 25px;
+    font-size: 1.5em;
+    background: linear-gradient(180deg, #1a1a2e, #0f0f1f);
     color: #ffd700;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.5);
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
 }
 .card__top {
-    top: 0;
-    border-bottom: 1px solid #000;
-    border-radius: 8px 8px 0 0;
+    border-radius: 4px 4px 0 0;
 }
 .card__bottom {
-    bottom: 0;
-    border-top: 1px solid #333;
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
-}
-.card__back {
-    top: 0;
-    height: 100%;
-    transform: rotateX(0deg);
-}
-.card__back::before {
-    content: attr(data-value);
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 50%;
-    border-radius: 8px 8px 0 0;
-    transform-origin: bottom;
-}
-.card__back .card__bottom {
-    position: absolute;
-    bottom: 0;
-    transform-origin: top;
-}
-.flip .card__back::before {
-    animation: flipTop 0.5s cubic-bezier(0.37, 0.01, 0.94, 0.35) forwards;
-}
-.flip .card__back .card__bottom {
-    animation: flipBottom 0.5s cubic-bezier(0.15, 0.45, 0.28, 1) forwards;
-}
-@keyframes flipTop {
-    0% { transform: rotateX(0deg); z-index: 2; }
-    100% { transform: rotateX(-180deg); z-index: 1; }
-}
-@keyframes flipBottom {
-    0% { transform: rotateX(180deg); z-index: 1; }
-    100% { transform: rotateX(0deg); z-index: 2; }
+    border-radius: 0 0 4px 4px;
 }
 @keyframes glowPulse {
     from { box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.2); }
     to { box-shadow: 0 15px 70px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 215, 0, 0.4); }
 }
 @media (max-width: 600px) {
-    h1 { font-size: 3em; }
-    p { font-size: 1.2em; }
-    .container { padding: 20px; }
-    .card { width: 50px; height: 60px; font-size: 2em; line-height: 60px; }
-    .flip-clock__slot { bottom: -20px; font-size: 0.8em; }
+    .top-cap, .body { width: 200px; }
+    h1 { font-size: 2.5em; }
+    p { font-size: 1em; }
+    .card { width: 30px; height: 40px; font-size: 1em; line-height: 40px; }
+    .card__top, .card__bottom { height: 20px; }
 }
