@@ -6,116 +6,215 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: radial-gradient(circle at center, #0a0a1a, #000); /* Mysterious cosmic gradient */
+    background: radial-gradient(circle at center, #0f0c29, #302b63, #24243e); /* Space nebula gradient in blues and purples */
     color: #fff;
     text-align: center;
     overflow: hidden;
+    position: relative;
 }
-#myCanvas {
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    box-shadow: 
+        100px 100px 1px #fff,
+        200px 300px 1px #fff,
+        400px 200px 1px #fff,
+        600px 400px 1px #fff,
+        800px 100px 1px #fff,
+        900px 500px 1px #fff,
+        1100px 200px 1px #fff,
+        1200px 400px 1px #fff,
+        1300px 600px 1px #fff,
+        1400px 300px 1px #fff,
+        50px 50px 1px #fff,
+        150px 250px 1px #fff,
+        350px 150px 1px #fff,
+        550px 350px 1px #fff,
+        750px 50px 1px #fff,
+        850px 450px 1px #fff,
+        1050px 150px 1px #fff,
+        1150px 350px 1px #fff,
+        1250px 550px 1px #fff,
+        1350px 250px 1px #fff;
+    animation: twinkle 3s infinite alternate;
+    opacity: 0.8;
+}
+@keyframes twinkle {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+}
+.smoke {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.particle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    filter: blur(5px);
+    animation: smokeRise 10s infinite linear;
+}
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 15s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 12s; }
+.particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 18s; }
+.particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 14s; }
+.particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 16s; }
+.particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 13s; }
+.particle:nth-child(7) { left: 70%; animation-delay: 0.5s; animation-duration: 17s; }
+.particle:nth-child(8) { left: 80%; animation-delay: 2.5s; animation-duration: 11s; }
+.particle:nth-child(9) { left: 90%; animation-delay: 4.5s; animation-duration: 19s; }
+.particle:nth-child(10) { left: 95%; animation-delay: 1.5s; animation-duration: 20s; }
+@keyframes smokeRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) scale(3);
+        opacity: 0;
+    }
+}
+#fireworksCanvas {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -1; /* Behind content */
+    z-index: -1;
+    opacity: 0.7; /* Softer for space feel */
 }
-.cylinder {
+.container {
     position: relative;
     z-index: 1;
-    perspective: 1000px;
-    transform-style: preserve-3d;
-}
-.top-cap {
-    width: 300px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 150px 150px 0 0;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: rotateX(15deg);
-}
-.body {
-    width: 300px;
-    height: 400px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-top: none;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 215, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    transform: rotateX(15deg);
-    border-radius: 0 0 150px 150px;
-    animation: glowPulse 3s ease-in-out infinite alternate;
+    max-width: 600px;
+    padding: 40px;
+    background: rgba(10, 10, 26, 0.2);
+    border-radius: 30px;
+    backdrop-filter: blur(15px);
+    border: 2px solid transparent;
+    box-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700, 0 0 60px #ffd700, 0 0 80px #ffd700, 0 0 100px #ffd700; /* Neon glow */
+    animation: neonPulse 1.5s ease-in-out infinite alternate;
 }
 h1 {
-    font-size: 3em;
+    font-size: 3.5em;
     color: #ffd700;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    letter-spacing: 2px;
-    font-family: 'Cursive', sans-serif; /* Fancy font for "Coming Soon" look */
+    text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 40px #ffd700, 0 0 80px #ffd700, 0 0 90px #ffd700, 0 0 100px #ffd700, 0 0 150px #ffd700; /* Neon gold */
+    margin-bottom: 20px;
 }
 p {
-    font-size: 1.3em;
-    opacity: 0.95;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-size: 1.4em;
+    opacity: 0.9;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 .contact {
-    margin-top: 20px;
-    font-size: 1.2em;
+    margin-top: 30px;
+    font-size: 1.3em;
     color: #e0e0e0;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
-/* Flip clock styling adjusted for top cap */
 .flip-clock {
-    transform: scale(0.8); /* Small for top */
+    text-align: center;
     perspective: 800px;
+    margin: 20px auto;
 }
 .flip-clock__piece {
+    display: inline-block;
     margin: 0 5px;
 }
 .flip-clock__slot {
-    font-size: 0.8em;
+    font-size: 1em;
     color: #ffd700;
+    text-shadow: 0 0 10px #ffd700;
     position: absolute;
-    bottom: -20px;
+    bottom: -25px;
     left: 50%;
     transform: translateX(-50%);
 }
 .card {
-    width: 40px;
-    height: 50px;
-    font-size: 1.5em;
-    line-height: 50px;
+    display: block;
+    position: relative;
+    width: 60px;
+    height: 80px;
+    font-size: 2.5em;
+    line-height: 80px;
+    perspective: 800px;
 }
 .card__top, .card__bottom, .card__back::before, .card__back::after {
-    height: 25px;
-    font-size: 1.5em;
-    background: linear-gradient(180deg, #1a1a2e, #0f0f1f);
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
     color: #ffd700;
-    border-radius: 4px;
-    box-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ffd700, inset 0 0 5px #ffd700;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ffd700;
 }
 .card__top {
-    border-radius: 4px 4px 0 0;
+    top: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px 8px 0 0;
 }
 .card__bottom {
-    border-radius: 0 0 4px 4px;
+    bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
 }
-@keyframes glowPulse {
-    from { box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.2); }
-    to { box-shadow: 0 15px 70px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 215, 0, 0.4); }
+.card__back {
+    top: 0;
+    height: 100%;
+    transform: rotateX(0deg);
+}
+.card__back::before {
+    content: attr(data-value);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    border-radius: 8px 8px 0 0;
+    transform-origin: bottom;
+}
+.card__back .card__bottom {
+    position: absolute;
+    bottom: 0;
+    transform-origin: top;
+}
+.flip .card__back::before {
+    animation: flipTop 0.5s cubic-bezier(0.37, 0.01, 0.94, 0.35) forwards;
+}
+.flip .card__back .card__bottom {
+    animation: flipBottom 0.5s cubic-bezier(0.15, 0.45, 0.28, 1) forwards;
+}
+@keyframes flipTop {
+    0% { transform: rotateX(0deg); z-index: 2; }
+    100% { transform: rotateX(-180deg); z-index: 1; }
+}
+@keyframes flipBottom {
+    0% { transform: rotateX(180deg); z-index: 1; }
+    100% { transform: rotateX(0deg); z-index: 2; }
+}
+@keyframes neonPulse {
+    from { box-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700, 0 0 60px #ffd700, 0 0 80px #ffd700, 0 0 100px #ffd700; }
+    to { box-shadow: 0 0 30px #ffd700, 0 0 50px #ffd700, 0 0 70px #ffd700, 0 0 90px #ffd700, 0 0 110px #ffd700; }
 }
 @media (max-width: 600px) {
-    .top-cap, .body { width: 200px; }
     h1 { font-size: 2.5em; }
-    p { font-size: 1em; }
-    .card { width: 30px; height: 40px; font-size: 1em; line-height: 40px; }
-    .card__top, .card__bottom { height: 20px; }
-    .flip-clock__slot { bottom: -15px; font-size: 0.7em; }
+    p { font-size: 1.1em; }
+    .container { padding: 20px; }
+    .card { width: 40px; height: 60px; font-size: 1.8em; line-height: 60px; }
+    .flip-clock__slot { bottom: -20px; font-size: 0.8em; }
 }
