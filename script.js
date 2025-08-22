@@ -2,12 +2,12 @@
 const canvas = document.getElementById('spaceCanvas');
 const ctx = canvas.getContext('2d');
 let stars = [];
-const starCount = 250; // Increased for more density
+const starCount = 250;
 let nebulae = [];
-const nebulaCount = 8; // Increased for richer effect
+const nebulaCount = 8;
 let lightBursts = [];
 let cosmicDust = [];
-const dustCount = 150; // Increased cosmic dust
+const dustCount = 150;
 
 function initCanvas() {
     canvas.width = window.innerWidth;
@@ -75,7 +75,7 @@ function animate() {
         ctx.fill();
 
         if (Math.random() < 0.01) {
-            star.opacity = Math.random() * 0.7 + 0.2; // Twinkling effect
+            star.opacity = Math.random() * 0.7 + 0.2;
         }
     });
 
@@ -100,7 +100,7 @@ function animate() {
         if (dust.y < 0 || dust.y > canvas.height) dust.speedY *= -1;
         ctx.beginPath();
         ctx.arc(dust.x, dust.y, dust.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(209, 196, 233, ${dust.opacity})`; // Lavender dust
+        ctx.fillStyle = `rgba(209, 196, 233, ${dust.opacity})`;
         ctx.fill();
     });
 
@@ -109,7 +109,7 @@ function animate() {
     lightBursts.forEach((burst, index) => {
         ctx.beginPath();
         ctx.arc(burst.x, burst.y, burst.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 215, 0, ${burst.opacity})`; // Subtle gold
+        ctx.fillStyle = `rgba(255, 215, 0, ${burst.opacity})`;
         ctx.fill();
 
         burst.radius += 1.5;
@@ -135,7 +135,7 @@ function CountdownTracker(label, value) {
     var el = document.createElement('span');
     el.className = 'flip-clock__piece';
     el.innerHTML = '<span class="flip-clock__card card"><span class="card__top"></span><span class="card__bottom"></span><span class="card__back"><span class="card__bottom"></span></span></span>' +
-        '<span class="flip-clock__slot">' + label + '</span>'; // Show labels for all units
+        '<span class="flip-clock__slot">' + label + '</span>';
     this.el = el;
     var top = el.querySelector('.card__top'),
         bottom = el.querySelector('.card__bottom'),
@@ -190,7 +190,7 @@ function Clock(countdown, callback) {
         trackers[key] = new CountdownTracker(key, t[key]);
         this.el.appendChild(trackers[key].el);
         if (i < units.length - 1) {
-            addColon(this.el); // Add colon between units
+            addColon(this.el);
         }
     }
     var i = 0;
@@ -209,7 +209,7 @@ function Clock(countdown, callback) {
     setTimeout(updateClock, 500);
 }
 
-// Set deadline to one year from today (August 21, 2025, 09:44 PM PDT)
+// Set deadline to one year from August 21, 2025
 var today = new Date('2025-08-21T21:44:00-07:00');
-var deadline = new Date(today.getTime() + 365 * 24 * 60 * 60 * 1000); // One year from now
+var deadline = new Date(today.getTime() + 365 * 24 * 60 * 60 * 1000);
 var c = new Clock(deadline, function() { console.log('Countdown complete'); });
