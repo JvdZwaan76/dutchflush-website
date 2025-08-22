@@ -1,6 +1,8 @@
-// Subtle light effects for mysterious ambiance
-const canvas = document.getElementById('lightCanvas');
+// Animated space effects with moving particles and light bursts
+const canvas = document.getElementById('spaceCanvas');
 const ctx = canvas.getContext('2d');
+let particles = [];
+const particleCount = 50;
 
 function initCanvas() {
     canvas.width = window.innerWidth;
@@ -9,23 +11,81 @@ function initCanvas() {
 initCanvas();
 window.addEventListener('resize', initCanvas);
 
-function drawLightBeams() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-    for (let i = 0; i < 5; i++) {
-        let x = Math.random() * canvas.width;
-        let y = Math.random() * canvas.height;
-        let radius = Math.random() * 100 + 50;
-        ctx.beginPath();
-        ctx.arc(x, y, radius, 0, 2 * Math.PI);
-        ctx.fill();
-    }
-    requestAnimationFrame(drawLightBeams);
+// Create particles for space animation
+for (let i = 0; i < particleCount; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5,
+        opacity: Math.random() * 0.5 + 0.2
+    });
 }
 
-drawLightBeams();
+// Light burst effect
+function createLightBurst() {
+    let burst = {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: 0,
+        maxRadius: Math.random() * 100 + 50,
+        opacity: 0.8
+    };
+    return burst;
+}
 
-// Flip countdown timer
+let lightBursts = [];
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Animate particles
+    particles.forEach((particle, index) => {
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+
+        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+        ctx.fill();
+
+        // Occasionally adjust opacity for twinkling effect
+        if (Math.random() < 0.01) {
+            particle.opacity = Math.random() * 0.5 + 0.2;
+        }
+    });
+
+    // Animate light bursts
+    lightBursts = lightBursts.filter(burst => burst.opacity > 0);
+    lightBursts.forEach((burst, index) => {
+        ctx.beginPath();
+        ctx.arc(burst.x, burst.y, burst.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 215, 0, ${burst.opacity})`; // Gold light
+        ctx.fill();
+
+        burst.radius += 1;
+        burst.opacity -= 0.005;
+
+        if (burst.radius > burst.maxRadius) {
+            lightBursts.splice(index, 1);
+        }
+    });
+
+    // Randomly spawn new light bursts
+    if (Math.random() < 0.02) {
+        lightBursts.push(createLightBurst());
+    }
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+// Flip countdown timer (using existing logic)
 function CountdownTracker(label, value) {
     var el = document.createElement('span');
     el.className = 'flip-clock__piece';
@@ -93,5 +153,5 @@ function Clock(countdown, callback) {
     setTimeout(updateClock, 500);
 }
 
-var deadline = new Date(Date.parse(new Date()) + 365 * 24 * 60 * 60 * 1000);
+var deadline = new Date('2026-08-21T00:00:00-07:00'); // Launch date
 var c = new Clock(deadline, function() { console.log('Countdown complete'); });
