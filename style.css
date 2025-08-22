@@ -90,36 +90,47 @@ body {
 }
 
 h1 {
-    font-size: 3em;
+    font-family: 'Neonderthaw', cursive;
+    font-size: 4em;
     margin-bottom: 30px;
-    font-weight: 700;
-    color: #fff;
+    font-weight: 400;
+    color: #ff6600;
     text-shadow: 
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 40px #bb86fc,
-        0 0 70px #bb86fc,
-        0 0 80px #bb86fc,
-        0 0 100px #bb86fc,
-        0 0 150px #bb86fc;
-    animation: neonFlicker 1.5s infinite ease-in-out;
+        0 0 4px #fff, 
+        0 0 10px #ff6600,
+        0 0 20px #ff6600,
+        0 0 40px #ff4500, 
+        0 0 70px #ff4500,
+        0 0 80px #ff4500,
+        0 0 100px #ff4500,
+        0 0 150px #ff4500;
+    animation: neonFlicker 2s infinite ease-in-out;
+    letter-spacing: -0.05em;
 }
 
 @keyframes neonFlicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
         text-shadow: 
-            0 0 5px #fff,
-            0 0 10px #fff,
-            0 0 20px #fff,
-            0 0 40px #bb86fc,
-            0 0 70px #bb86fc,
-            0 0 80px #bb86fc,
-            0 0 100px #bb86fc,
-            0 0 150px #bb86fc;
+            0 0 4px #fff,
+            0 0 10px #ff6600,
+            0 0 20px #ff6600,
+            0 0 40px #ff4500,
+            0 0 70px #ff4500,
+            0 0 80px #ff4500,
+            0 0 100px #ff4500,
+            0 0 150px #ff4500;
     }
     20%, 24%, 55% {
-        text-shadow: none;
+        text-shadow: 
+            0 0 2px #fff,
+            0 0 5px #ff6600,
+            0 0 10px #ff6600,
+            0 0 20px #ff4500,
+            0 0 35px #ff4500,
+            0 0 40px #ff4500,
+            0 0 50px #ff4500,
+            0 0 75px #ff4500;
+        opacity: 0.8;
     }
 }
 
@@ -129,7 +140,7 @@ h1 {
     margin: 30px auto;
     display: flex;
     justify-content: center;
-    gap: 5px; /* Reduced gap for tighter layout with colons */
+    gap: 5px;
 }
 
 .flip-clock__piece {
@@ -156,14 +167,14 @@ h1 {
 .card {
     display: block;
     position: relative;
-    width: 70px; /* Slightly larger for professionalism */
-    height: 90px; /* Adjusted height for better proportion */
-    font-size: 2.8em; /* Larger font for clarity */
+    width: 70px;
+    height: 90px;
+    font-size: 2.8em;
     line-height: 90px;
     perspective: 1000px;
-    background: rgba(255, 255, 255, 0.05); /* Subtle background for contrast */
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Added glow for sophistication */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .card__top, .card__bottom, .card__back::before, .card__back::after {
@@ -219,11 +230,11 @@ h1 {
 }
 
 .flip .card__back::before {
-    animation: flipDown 0.6s cubic-bezier(0.37, 0.01, 0.94, 0.35) forwards; /* Slightly slower for smoothness */
+    animation: flipDown 0.6s cubic-bezier(0.37, 0.01, 0.94, 0.35) forwards;
 }
 
 .flip .card__back .card__bottom {
-    animation: flipDownBottom 0.6s cubic-bezier(0.15, 0.45, 0.28, 1) forwards; /* Slightly slower */
+    animation: flipDownBottom 0.6s cubic-bezier(0.15, 0.45, 0.28, 1) forwards;
 }
 
 @keyframes flipDown {
@@ -246,24 +257,24 @@ h1 {
 
 .invite-btn {
     background: transparent;
-    border: 2px solid #fff; /* Thicker border for professionalism */
+    border: 2px solid #fff;
     color: #fff;
-    padding: 12px 30px; /* Slightly larger padding */
-    margin: 20px 0; /* Increased margin for spacing */
-    border-radius: 8px; /* Softer corners */
+    padding: 12px 30px;
+    margin: 20px 0;
+    border-radius: 8px;
     cursor: pointer;
     transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
-    font-size: 1.2em; /* Larger font for emphasis */
+    font-size: 1.2em;
     text-transform: uppercase;
-    letter-spacing: 1.5px; /* Increased spacing for elegance */
-    text-decoration: none; /* Ensure no underline for mailto link */
-    display: inline-block; /* Ensure proper rendering as a button */
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .invite-btn:hover {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); /* Softer glow */
-    transform: translateY(-3px); /* Slightly more lift */
-    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover background */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .contact {
@@ -273,7 +284,7 @@ h1 {
 }
 
 @media (max-width: 600px) {
-    h1 { font-size: 2.5em; }
+    h1 { font-size: 3em; }
     .container { padding: 30px; }
     .card { width: 60px; height: 80px; font-size: 2.2em; line-height: 80px; }
     .flip-clock__slot { bottom: -18px; font-size: 0.8em; }
