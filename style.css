@@ -95,11 +95,6 @@ h1 {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.launch-info {
-    font-size: 1.2em;
-    margin-top: 20px;
-}
-
 .flip-clock {
     text-align: center;
     perspective: 800px;
