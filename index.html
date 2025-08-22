@@ -4,12 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DutchFlush - Coming Soon</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #4b86b4);
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        p {
+            font-size: 1.4em;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        .contact {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #e0e0e0;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em; }
+            p { font-size: 1.1em; }
+            .container { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
-    <div style="text-align: center; padding: 50px;">
+    <div class="container">
         <h1>DutchFlush</h1>
-        <p>Exciting things are coming soon! Stay tuned for our launch.</p>
-        <p>Contact: info@dutchflush.com</p>
+        <p>Exciting things are coming soon!</p>
+        <p>Stay tuned for our launch.</p>
+        <div class="contact">Contact: info@dutchflush.com</div>
     </div>
 </body>
 </html>
