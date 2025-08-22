@@ -208,6 +208,7 @@ h1 {
     font-size: 1.1em;
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-decoration: none; /* Ensure no underline for mailto link */
 }
 
 .invite-btn:hover {
