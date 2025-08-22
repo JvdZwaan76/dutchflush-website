@@ -1,8 +1,11 @@
-// Animated space effects with moving particles and light bursts
+// Enhanced animated space effects with moving stars, nebulae, and light bursts
 const canvas = document.getElementById('spaceCanvas');
 const ctx = canvas.getContext('2d');
-let particles = [];
-const particleCount = 50;
+let stars = [];
+const starCount = 100;
+let nebulae = [];
+const nebulaCount = 3;
+let lightBursts = [];
 
 function initCanvas() {
     canvas.width = window.innerWidth;
@@ -11,52 +14,61 @@ function initCanvas() {
 initCanvas();
 window.addEventListener('resize', initCanvas);
 
-// Create particles for space animation
-for (let i = 0; i < particleCount; i++) {
-    particles.push({
+// Create stars
+for (let i = 0; i < starCount; i++) {
+    stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.5 + 0.2
+        size: Math.random() * 1.5 + 0.5,
+        speed: Math.random() * 0.2 + 0.1,
+        opacity: Math.random() * 0.6 + 0.2
+    });
+}
+
+// Create nebulae
+for (let i = 0; i < nebulaCount; i++) {
+    nebulae.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 150 + 100,
+        hue: Math.floor(Math.random() * 30) + 200,
+        opacity: Math.random() * 0.3 + 0.1
     });
 }
 
 // Light burst effect
 function createLightBurst() {
-    let burst = {
+    return {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: 0,
-        maxRadius: Math.random() * 100 + 50,
-        opacity: 0.8
+        maxRadius: Math.random() * 80 + 40,
+        opacity: 0.7
     };
-    return burst;
 }
-
-let lightBursts = [];
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Animate particles
-    particles.forEach((particle, index) => {
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
-
-        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
-
+    // Animate stars
+    stars.forEach((star) => {
+        star.x += star.speed;
+        if (star.x > canvas.width) star.x = 0;
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
+    });
 
-        // Occasionally adjust opacity for twinkling effect
-        if (Math.random() < 0.01) {
-            particle.opacity = Math.random() * 0.5 + 0.2;
-        }
+    // Animate nebulae
+    nebulae.forEach((nebula) => {
+        const gradient = ctx.createRadialGradient(nebula.x, nebula.y, 0, nebula.x, nebula.y, nebula.radius);
+        gradient.addColorStop(0, `hsla(${nebula.hue}, 70%, 30%, ${nebula.opacity})`);
+        gradient.addColorStop(1, 'transparent');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(nebula.x, nebula.y, nebula.radius, 0, Math.PI * 2);
+        ctx.fill();
     });
 
     // Animate light bursts
@@ -64,11 +76,11 @@ function animate() {
     lightBursts.forEach((burst, index) => {
         ctx.beginPath();
         ctx.arc(burst.x, burst.y, burst.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 215, 0, ${burst.opacity})`; // Gold light
+        ctx.fillStyle = `rgba(255, 215, 0, ${burst.opacity})`; // Subtle gold
         ctx.fill();
 
-        burst.radius += 1;
-        burst.opacity -= 0.005;
+        burst.radius += 0.8;
+        burst.opacity -= 0.007;
 
         if (burst.radius > burst.maxRadius) {
             lightBursts.splice(index, 1);
@@ -76,7 +88,7 @@ function animate() {
     });
 
     // Randomly spawn new light bursts
-    if (Math.random() < 0.02) {
+    if (Math.random() < 0.015) {
         lightBursts.push(createLightBurst());
     }
 
