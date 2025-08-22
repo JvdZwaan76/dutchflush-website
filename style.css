@@ -91,39 +91,51 @@ body {
 
 h1 {
     font-size: 3em;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-weight: 700;
 }
 
 .flip-clock {
     text-align: center;
-    perspective: 800px;
-    margin: 20px auto;
+    perspective: 1000px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Consistent spacing between digits */
 }
 
 .flip-clock__piece {
-    display: inline-block;
-    margin: 0 5px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    position: relative;
 }
 
 .flip-clock__slot {
-    font-size: 1em;
+    font-size: 0.9em;
     color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
     position: absolute;
-    bottom: -25px;
+    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .card {
     display: block;
     position: relative;
-    width: 60px;
-    height: 80px;
-    font-size: 2.5em;
-    line-height: 80px;
-    perspective: 800px;
+    width: 70px; /* Slightly larger for professionalism */
+    height: 90px; /* Adjusted height for better proportion */
+    font-size: 2.8em; /* Larger font for clarity */
+    line-height: 90px;
+    perspective: 1000px;
+    background: rgba(255, 255, 255, 0.05); /* Subtle background for contrast */
+    border-radius: 5px;
 }
 
 .card__top, .card__bottom, .card__back::before, .card__back::after {
@@ -135,24 +147,24 @@ h1 {
     justify-content: center;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     backface-visibility: hidden;
     transform-style: preserve-3d;
-    font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 .card__top {
     top: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px 8px 0 0;
+    border-radius: 5px 5px 0 0;
 }
 
 .card__bottom {
     bottom: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 5px 5px;
     overflow: hidden;
 }
 
@@ -168,7 +180,7 @@ h1 {
     top: 0;
     width: 100%;
     height: 50%;
-    border-radius: 8px 8px 0 0;
+    border-radius: 5px 5px 0 0;
     transform-origin: bottom;
 }
 
@@ -198,22 +210,24 @@ h1 {
 
 .invite-btn {
     background: transparent;
-    border: 1px solid #fff;
+    border: 2px solid #fff; /* Thicker border for professionalism */
     color: #fff;
-    padding: 12px 25px;
-    margin: 15px 0;
-    border-radius: 5px;
+    padding: 12px 30px; /* Slightly larger padding */
+    margin: 20px 0; /* Increased margin for spacing */
+    border-radius: 8px; /* Softer corners */
     cursor: pointer;
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
-    font-size: 1.1em;
+    transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+    font-size: 1.2em; /* Larger font for emphasis */
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px; /* Increased spacing for elegance */
     text-decoration: none; /* Ensure no underline for mailto link */
+    display: inline-block; /* Ensure proper rendering as a button */
 }
 
 .invite-btn:hover {
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); /* Softer glow */
+    transform: translateY(-3px); /* Slightly more lift */
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover background */
 }
 
 .contact {
@@ -225,7 +239,7 @@ h1 {
 @media (max-width: 600px) {
     h1 { font-size: 2.5em; }
     .container { padding: 30px; }
-    .card { width: 50px; height: 70px; font-size: 2em; line-height: 70px; }
-    .flip-clock__slot { bottom: -22px; font-size: 0.9em; }
-    .invite-btn { padding: 10px 20px; font-size: 1em; }
+    .card { width: 60px; height: 80px; font-size: 2.2em; line-height: 80px; }
+    .flip-clock__slot { bottom: -18px; font-size: 0.8em; }
+    .invite-btn { padding: 10px 20px; font-size: 1em; margin: 15px 0; }
 }
