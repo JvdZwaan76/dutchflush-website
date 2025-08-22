@@ -13,52 +13,305 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1e3c72, #2a5298, #4b86b4);
+            background: black; /* Mysterious night sky */
             color: #fff;
             text-align: center;
             overflow: hidden;
         }
+        #myCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Behind content */
+        }
         .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            animation: float 4s ease-in-out infinite;
+            background: rgba(255, 255, 255, 0.05); /* Glassmorphic effect */
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: glowPulse 2s ease-in-out infinite alternate; /* Subtle glow pulse */
         }
         h1 {
-            font-size: 3.5em;
+            font-size: 4em;
             margin-bottom: 20px;
-            color: #ffd700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ffd700; /* Gold for appeal */
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7); /* Glowing shadow */
         }
         p {
-            font-size: 1.4em;
+            font-size: 1.5em;
             margin: 10px 0;
             opacity: 0.9;
         }
         .contact {
-            margin-top: 20px;
-            font-size: 1.2em;
+            margin-top: 30px;
+            font-size: 1.3em;
             color: #e0e0e0;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        /* Flip clock styles (sophisticated retro flip animation) */
+        .flip-clock {
+            text-align: center;
+            perspective: 600px;
+            margin: 20px auto;
+        }
+        .flip-clock__piece {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .flip-clock__slot {
+            font-size: 1.2em;
+            color: #ffd700;
+        }
+        .card {
+            display: block;
+            position: relative;
+            padding-bottom: 0.72em;
+            font-size: 4vw;
+            line-height: 0.95;
+        }
+        .card__top, .card__bottom, .card__back::before, .card__back::after {
+            display: block;
+            height: 0.72em;
+            color: #fff;
+            background: #1a1a1a; /* Dark for mystery */
+            padding: 0.25em 0.25em;
+            border-radius: 0.15em;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            width: 1.8em;
+            transform: translateZ(0);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); /* Subtle glow */
+        }
+        .card__bottom {
+            color: #ffd700;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            border-top: solid 1px #000;
+            background: #333;
+            border-radius: 0 0 0.15em 0.15em;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .card__bottom::after {
+            display: block;
+            margin-top: -0.72em;
+        }
+        .card__back::before, .card__bottom::after {
+            content: attr(data-value);
+        }
+        .card__back {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            left: 0;
+            pointer-events: none;
+        }
+        .card__back::before {
+            position: relative;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .flip .card__back::before {
+            animation: flipTop 0.3s cubic-bezier(.37,.01,.94,.35);
+            animation-fill-mode: both;
+            transform-origin: center bottom;
+        }
+        .flip .card__back .card__bottom {
+            transform-origin: center top;
+            animation: flipBottom 0.6s cubic-bezier(.15,.45,.28,1);
+            animation-fill-mode: both;
+        }
+        @keyframes flipTop {
+            0% { transform: rotateX(0deg); z-index: 2; }
+            0%, 99% { opacity: 1; }
+            100% { transform: rotateX(-90deg); opacity: 0; }
+        }
+        @keyframes flipBottom {
+            0%, 50% { z-index: -1; transform: rotateX(90deg); opacity: 0; }
+            51% { opacity: 1; }
+            100% { opacity: 1; transform: rotateX(0deg); z-index: 5; }
+        }
+        /* Glow pulse for container */
+        @keyframes glowPulse {
+            from { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); }
+            to { box-shadow: 0 10px 60px rgba(255, 215, 0, 0.3); }
         }
         @media (max-width: 600px) {
             h1 { font-size: 2.5em; }
-            p { font-size: 1.1em; }
+            p { font-size: 1.2em; }
             .container { padding: 20px; }
+            .card { font-size: 6vw; }
+            .flip-clock__slot { font-size: 1.5vw; }
         }
     </style>
 </head>
 <body>
+    <canvas id="myCanvas"></canvas>
     <div class="container">
         <h1>DutchFlush</h1>
         <p>Exciting things are coming soon!</p>
-        <p>Stay tuned for our launch.</p>
+        <p>Stay tuned for our launch in:</p>
+        <div id="countdown"></div>
         <div class="contact">Contact: info@dutchflush.com</div>
     </div>
+    <script>
+        // Fireworks background animation (sophisticated bursts for appeal)
+        const max_fireworks = 5, max_sparks = 50;
+        let canvas = document.getElementById('myCanvas');
+        let context = canvas.getContext('2d');
+        let fireworks = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        initCanvas();
+        window.addEventListener('resize', initCanvas);
+
+        for (let i = 0; i < max_fireworks; i++) {
+            let firework = { sparks: [] };
+            for (let n = 0; n < max_sparks; n++) {
+                let spark = {
+                    vx: Math.random() * 5 + 0.5,
+                    vy: Math.random() * 5 + 0.5,
+                    weight: Math.random() * 0.3 + 0.03,
+                    red: Math.floor(Math.random() * 2),
+                    green: Math.floor(Math.random() * 2),
+                    blue: Math.floor(Math.random() * 2)
+                };
+                if (Math.random() > 0.5) spark.vx = -spark.vx;
+                if (Math.random() > 0.5) spark.vy = -spark.vy;
+                firework.sparks.push(spark);
+            }
+            fireworks.push(firework);
+            resetFirework(firework);
+        }
+        window.requestAnimationFrame(explode);
+
+        function resetFirework(firework) {
+            firework.x = Math.floor(Math.random() * canvas.width);
+            firework.y = canvas.height;
+            firework.age = 0;
+            firework.phase = 'fly';
+        }
+
+        function explode() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            fireworks.forEach((firework, index) => {
+                if (firework.phase == 'explode') {
+                    firework.sparks.forEach((spark) => {
+                        for (let i = 0; i < 10; i++) {
+                            let trailAge = firework.age + i;
+                            let x = firework.x + spark.vx * trailAge;
+                            let y = firework.y + spark.vy * trailAge + spark.weight * trailAge * spark.weight * trailAge;
+                            let fade = i * 20 - firework.age * 2;
+                            let r = Math.floor(spark.red * fade);
+                            let g = Math.floor(spark.green * fade);
+                            let b = Math.floor(spark.blue * fade);
+                            context.beginPath();
+                            context.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',1)';
+                            context.rect(x, y, 4, 4);
+                            context.fill();
+                        }
+                    });
+                    firework.age++;
+                    if (firework.age > 100 && Math.random() < 0.05) {
+                        resetFirework(firework);
+                    }
+                } else {
+                    firework.y = firework.y - 10;
+                    for (let spark = 0; spark < 15; spark++) {
+                        context.beginPath();
+                        context.fillStyle = 'rgba(' + index * 50 + ',' + spark * 17 + ',0,1)';
+                        context.rect(firework.x + Math.random() * spark - spark / 2, firework.y + spark * 4, 4, 4);
+                        context.fill();
+                    }
+                    if (Math.random() < 0.001 || firework.y < 200) firework.phase = 'explode';
+                }
+            });
+            window.requestAnimationFrame(explode);
+        }
+
+        // Sexy flip countdown timer (one year from today)
+        function CountdownTracker(label, value) {
+            var el = document.createElement('span');
+            el.className = 'flip-clock__piece';
+            el.innerHTML = '<b class="flip-clock__card card"><b class="card__top"></b><b class="card__bottom"></b><b class="card__back"><b class="card__bottom"></b></b></b>' +
+                '<span class="flip-clock__slot">' + label + '</span>';
+            this.el = el;
+            var top = el.querySelector('.card__top'),
+                bottom = el.querySelector('.card__bottom'),
+                back = el.querySelector('.card__back'),
+                backBottom = el.querySelector('.card__back .card__bottom');
+            this.update = function(val) {
+                val = ('0' + val).slice(-2);
+                if (val !== this.currentValue) {
+                    if (this.currentValue >= 0) {
+                        back.setAttribute('data-value', this.currentValue);
+                        bottom.setAttribute('data-value', this.currentValue);
+                    }
+                    this.currentValue = val;
+                    top.innerText = this.currentValue;
+                    backBottom.setAttribute('data-value', this.currentValue);
+                    this.el.classList.remove('flip');
+                    void this.el.offsetWidth;
+                    this.el.classList.add('flip');
+                }
+            }
+            this.update(value);
+        }
+
+        function getTimeRemaining(endtime) {
+            var t = Date.parse(endtime) - Date.parse(new Date());
+            return {
+                'Total': t,
+                'Days': Math.floor(t / (1000 * 60 * 60 * 24)),
+                'Hours': Math.floor((t / (1000 * 60 * 60)) % 24),
+                'Minutes': Math.floor((t / 1000 / 60) % 60),
+                'Seconds': Math.floor((t / 1000) % 60)
+            };
+        }
+
+        function Clock(countdown, callback) {
+            callback = callback || function() {};
+            this.el = document.createElement('div');
+            this.el.className = 'flip-clock';
+            var trackers = {},
+                t = getTimeRemaining(countdown),
+                key,
+                timeinterval;
+            for (key in t) {
+                if (key === 'Total') { continue; }
+                trackers[key] = new CountdownTracker(key, t[key]);
+                this.el.appendChild(trackers[key].el);
+            }
+            var i = 0;
+            function updateClock() {
+                timeinterval = requestAnimationFrame(updateClock);
+                if (i++ % 10) { return; }
+                var t = getTimeRemaining(countdown);
+                if (t.Total < 0) {
+                    cancelAnimationFrame(timeinterval);
+                    for (key in trackers) {
+                        trackers[key].update(0);
+                    }
+                    callback();
+                    return;
+                }
+                for (key in trackers) {
+                    trackers[key].update(t[key]);
+                }
+            }
+            setTimeout(updateClock, 500);
+        }
+
+        var deadline = new Date(Date.parse(new Date()) + 365 * 24 * 60 * 60 * 1000);
+        var c = new Clock(deadline, function() { console.log('Countdown complete'); });
+        document.getElementById('countdown').appendChild(c.el);
+    </script>
 </body>
 </html>
