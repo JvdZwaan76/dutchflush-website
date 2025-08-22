@@ -58,6 +58,7 @@ h1 {
     color: #ffd700;
     text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
     letter-spacing: 2px;
+    font-family: 'Cursive', sans-serif; /* Fancy font for "Coming Soon" look */
 }
 p {
     font-size: 1.3em;
@@ -116,4 +117,5 @@ p {
     p { font-size: 1em; }
     .card { width: 30px; height: 40px; font-size: 1em; line-height: 40px; }
     .card__top, .card__bottom { height: 20px; }
+    .flip-clock__slot { bottom: -15px; font-size: 0.7em; }
 }
