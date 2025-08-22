@@ -135,7 +135,7 @@ function CountdownTracker(label, value) {
     var el = document.createElement('span');
     el.className = 'flip-clock__piece';
     el.innerHTML = '<span class="flip-clock__card card"><span class="card__top"></span><span class="card__bottom"></span><span class="card__back"><span class="card__bottom"></span></span></span>' +
-        (label === 'Days' ? '<span class="flip-clock__slot">' + label + '</span>' : ''); // Only show Days label
+        '<span class="flip-clock__slot">' + label + '</span>'; // Show labels for all units
     this.el = el;
     var top = el.querySelector('.card__top'),
         bottom = el.querySelector('.card__bottom'),
@@ -166,8 +166,15 @@ function getTimeRemaining(endtime) {
         'Days': Math.floor(t / (1000 * 60 * 60 * 24)),
         'Hours': Math.floor((t / (1000 * 60 * 60)) % 24),
         'Minutes': Math.floor((t / 1000 / 60) % 60),
-        'Seconds': Math.floor((t / 1000) % 60) // Kept for countdown accuracy
+        'Seconds': Math.floor((t / 1000) % 60)
     };
+}
+
+function addColon(clockEl) {
+    var colon = document.createElement('span');
+    colon.className = 'colon';
+    colon.innerText = ':';
+    clockEl.appendChild(colon);
 }
 
 function Clock(countdown, callback) {
@@ -177,10 +184,14 @@ function Clock(countdown, callback) {
         t = getTimeRemaining(countdown),
         key,
         timeinterval;
-    for (key in t) {
-        if (key === 'Total' || key === 'Hours' || key === 'Minutes' || key === 'Seconds') continue; // Exclude all but Days
+    var units = ['Days', 'Hours', 'Minutes', 'Seconds'];
+    for (var i = 0; i < units.length; i++) {
+        key = units[i];
         trackers[key] = new CountdownTracker(key, t[key]);
         this.el.appendChild(trackers[key].el);
+        if (i < units.length - 1) {
+            addColon(this.el); // Add colon between units
+        }
     }
     var i = 0;
     function updateClock() {
