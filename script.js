@@ -2,12 +2,12 @@
 const canvas = document.getElementById('spaceCanvas');
 const ctx = canvas.getContext('2d');
 let stars = [];
-const starCount = 200; // Increased for more density
+const starCount = 250; // Increased for more density
 let nebulae = [];
-const nebulaCount = 6; // Increased for richer effect
+const nebulaCount = 8; // Increased for richer effect
 let lightBursts = [];
 let cosmicDust = [];
-const dustCount = 100; // New cosmic dust effect
+const dustCount = 150; // Increased cosmic dust
 
 function initCanvas() {
     canvas.width = window.innerWidth;
@@ -32,7 +32,7 @@ for (let i = 0; i < nebulaCount; i++) {
     nebulae.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 250 + 200,
+        radius: Math.random() * 300 + 200,
         hue: Math.floor(Math.random() * 30) + 200,
         opacity: Math.random() * 0.5 + 0.1,
         speed: Math.random() * 0.05 - 0.025
@@ -45,9 +45,9 @@ for (let i = 0; i < dustCount; i++) {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 0.8 + 0.2,
-        speedX: (Math.random() - 0.5) * 0.2,
-        speedY: (Math.random() - 0.5) * 0.2,
-        opacity: Math.random() * 0.3 + 0.1
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.4 + 0.1
     });
 }
 
@@ -57,7 +57,7 @@ function createLightBurst() {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: 0,
-        maxRadius: Math.random() * 120 + 60,
+        maxRadius: Math.random() * 150 + 80,
         opacity: 0.6
     };
 }
@@ -112,7 +112,7 @@ function animate() {
         ctx.fillStyle = `rgba(255, 215, 0, ${burst.opacity})`; // Subtle gold
         ctx.fill();
 
-        burst.radius += 1.2;
+        burst.radius += 1.5;
         burst.opacity -= 0.008;
 
         if (burst.radius > burst.maxRadius) {
@@ -121,7 +121,7 @@ function animate() {
     });
 
     // Randomly spawn new light bursts
-    if (Math.random() < 0.008) {
+    if (Math.random() < 0.006) {
         lightBursts.push(createLightBurst());
     }
 
@@ -135,7 +135,7 @@ function CountdownTracker(label, value) {
     var el = document.createElement('span');
     el.className = 'flip-clock__piece';
     el.innerHTML = '<span class="flip-clock__card card"><span class="card__top"></span><span class="card__bottom"></span><span class="card__back"><span class="card__bottom"></span></span></span>' +
-        '<span class="flip-clock__slot">' + label + '</span>';
+        (label !== 'Seconds' ? '<span class="flip-clock__slot">' + label + '</span>' : ''); // Exclude Seconds label
     this.el = el;
     var top = el.querySelector('.card__top'),
         bottom = el.querySelector('.card__bottom'),
@@ -166,7 +166,7 @@ function getTimeRemaining(endtime) {
         'Days': Math.floor(t / (1000 * 60 * 60 * 24)),
         'Hours': Math.floor((t / (1000 * 60 * 60)) % 24),
         'Minutes': Math.floor((t / 1000 / 60) % 60),
-        'Seconds': Math.floor((t / 1000) % 60)
+        'Seconds': Math.floor((t / 1000) % 60) // Kept for countdown calculation but not displayed
     };
 }
 
@@ -178,7 +178,7 @@ function Clock(countdown, callback) {
         key,
         timeinterval;
     for (key in t) {
-        if (key === 'Total') continue;
+        if (key === 'Total' || key === 'Seconds') continue; // Exclude Seconds from display
         trackers[key] = new CountdownTracker(key, t[key]);
         this.el.appendChild(trackers[key].el);
     }
