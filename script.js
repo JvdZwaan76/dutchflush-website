@@ -130,12 +130,12 @@ function animate() {
 
 animate();
 
-// Flip countdown timer (using existing logic)
+// Flip countdown timer (using existing logic, excluding Minutes and Seconds)
 function CountdownTracker(label, value) {
     var el = document.createElement('span');
     el.className = 'flip-clock__piece';
     el.innerHTML = '<span class="flip-clock__card card"><span class="card__top"></span><span class="card__bottom"></span><span class="card__back"><span class="card__bottom"></span></span></span>' +
-        (label !== 'Seconds' ? '<span class="flip-clock__slot">' + label + '</span>' : ''); // Exclude Seconds label
+        (label === 'Days' || label === 'Hours' ? '<span class="flip-clock__slot">' + label + '</span>' : ''); // Only show Days and Hours labels
     this.el = el;
     var top = el.querySelector('.card__top'),
         bottom = el.querySelector('.card__bottom'),
@@ -166,7 +166,7 @@ function getTimeRemaining(endtime) {
         'Days': Math.floor(t / (1000 * 60 * 60 * 24)),
         'Hours': Math.floor((t / (1000 * 60 * 60)) % 24),
         'Minutes': Math.floor((t / 1000 / 60) % 60),
-        'Seconds': Math.floor((t / 1000) % 60) // Kept for countdown calculation but not displayed
+        'Seconds': Math.floor((t / 1000) % 60) // Kept for countdown accuracy
     };
 }
 
@@ -178,7 +178,7 @@ function Clock(countdown, callback) {
         key,
         timeinterval;
     for (key in t) {
-        if (key === 'Total' || key === 'Seconds') continue; // Exclude Seconds from display
+        if (key === 'Total' || key === 'Minutes' || key === 'Seconds') continue; // Exclude Minutes and Seconds from display
         trackers[key] = new CountdownTracker(key, t[key]);
         this.el.appendChild(trackers[key].el);
     }
