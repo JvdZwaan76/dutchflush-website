@@ -44,10 +44,25 @@
         <div class="coming-soon-badge">Coming Soon</div>
         <div class="flip-clock"></div>
         <a href="mailto:info@dutchflush.com?subject=Request%20Access" class="invite-btn">Request Access</a>
+        <button id="login-btn" class="login-btn">🔒 Login</button>
         <p class="contact">Inquiries: <a class="contact-link" href="#">info@dutchflush.com</a></p>
         <div class="globe-wrapper">
             <div id="earth"></div>
             <div id="current-times" class="current-times"></div>
+        </div>
+    </div>
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
 </body>
