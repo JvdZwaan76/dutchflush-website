@@ -290,6 +290,7 @@ h1 {
     justify-content: center;
     gap: clamp(10px, 2vw, 20px);
     margin: 15px 0;
+    flex-direction: row; /* Default row for larger screens */
 }
 
 .invite-btn {
@@ -574,5 +575,16 @@ h1 {
 @media (min-width: 1024px) {
     .container {
         max-width: 600px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cta-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .invite-btn {
+        width: 100%;
     }
 }
