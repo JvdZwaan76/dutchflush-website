@@ -230,4 +230,9 @@ const locations = [
 
 const timesDiv = document.getElementById('current-times');
 locations.forEach(loc => {
-    const timeOptions = { timeZone: loc.tz, hour: 'numeric', minute: '2-digit', hour12: true
+    const timeOptions = { timeZone: loc.tz, hour: 'numeric', minute: '2-digit', hour12: true };
+    const timeString = new Intl.DateTimeFormat('en-US', timeOptions).format(new Date());
+    const p = document.createElement('p');
+    p.textContent = `${loc.flag} ${loc.city}: ${timeString}`;
+    timesDiv.appendChild(p);
+});
