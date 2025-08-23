@@ -217,22 +217,4 @@ var c = new Clock(deadline, function() { console.log('Countdown complete'); });
 // Handle contact link click
 document.querySelector('.contact-link').addEventListener('click', function(e) {
     e.preventDefault();
-    window.location.href = 'mailto:' + atob('amFzcGVydmR6QG1lLmNvbQ==') + '?subject=Inquiry from DutchFlush.com';
-});
-
-// Display current times
-const locations = [
-    { city: 'Los Angeles, California', tz: 'America/Los_Angeles', flag: '🇺🇸' },
-    { city: 'Amsterdam, The Netherlands', tz: 'Europe/Amsterdam', flag: '🇳🇱' },
-    { city: 'Perth, Australia', tz: 'Australia/Perth', flag: '🇦🇺' },
-    { city: 'St. Croix, USVI', tz: 'America/St_Thomas', flag: '🇻🇮' }
-];
-
-const timesDiv = document.getElementById('current-times');
-locations.forEach(loc => {
-    const timeOptions = { timeZone: loc.tz, hour: 'numeric', minute: '2-digit', hour12: true };
-    const timeString = new Intl.DateTimeFormat('en-US', timeOptions).format(new Date());
-    const p = document.createElement('p');
-    p.textContent = `${loc.flag} ${loc.city}: ${timeString}`;
-    timesDiv.appendChild(p);
-});
+    window.location.href = 'mailto:' + atob('amFzcGVyd
