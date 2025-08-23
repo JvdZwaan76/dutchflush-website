@@ -324,7 +324,7 @@ h1 {
 
 .contact {
     margin-top: clamp(10px, 2vw, 20px);
-    margin-bottom: clamp(10px, 2vw, 20px);
+    margin-bottom: clamp(15px, 3vw, 30px); /* Increased to prevent overlap */
     font-size: clamp(0.8em, 2.5vw, 1em);
     opacity: 0.8;
 }
@@ -461,7 +461,7 @@ h1 {
 
     .contact {
         margin-top: 30px;
-        margin-bottom: 30px;
+        margin-bottom: 40px; /* Further increased for desktop */
     }
 
     .globe-wrapper {
