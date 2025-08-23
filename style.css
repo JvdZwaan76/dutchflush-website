@@ -293,12 +293,18 @@ h1 {
     margin: 0 5px;
 }
 
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: clamp(10px, 2vw, 20px);
+    margin: 15px 0;
+}
+
 .invite-btn {
     background: linear-gradient(145deg, rgba(255, 102, 0, 0.2), rgba(255, 102, 0, 0.1)); /* 3D gradient */
     border: 2px solid #ff6600;
     color: #fff;
     padding: clamp(8px, 2vw, 10px) clamp(15px, 4vw, 20px);
-    margin: 15px 0;
     border-radius: 8px;
     cursor: pointer;
     transition: box-shadow 0.3s ease, transform 0.2s ease, background 0.3s ease;
@@ -408,6 +414,68 @@ h1 {
     white-space: nowrap; /* Prevent wrapping on small screens */
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background: rgba(0, 0, 0, 0.6);
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+    width: 80%;
+    max-width: 400px;
+    text-align: left;
+}
+
+.close {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ff6600;
+}
+
+.modal-content h2 {
+    color: #ff6600;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-content label {
+    color: #fff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ff6600;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.modal-content button {
+    width: 100%;
 }
 
 @media (min-width: 601px) {
