@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    padding: 0;
+    padding: clamp(20px, 5vh, 50px) 0;
     font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
@@ -9,7 +9,7 @@ body {
     background: black;
     color: #fff;
     text-align: center;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
 }
 
@@ -379,114 +379,4 @@ h1 {
 }
 
 @keyframes rotate {
-    0% { background-position: 0 0; }
-    100% { background-position: 400px 0; }
-}
-
-.current-times {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.current-times p {
-    margin: 5px 0;
-    font-size: 0.9em;
-    opacity: 0.8;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* For readability over globe */
-}
-
-@media (min-width: 601px) {
-    .container {
-        max-width: 80%;
-        padding: clamp(30px, 5vw, 50px);
-        box-shadow: 
-            0 0 15px rgba(255, 102, 0, 0.4),
-            0 0 30px rgba(255, 102, 0, 0.3),
-            0 0 45px rgba(255, 69, 0, 0.2);
-    }
-
-    h1 {
-        font-size: 5em;
-        margin-bottom: 10px;
-    }
-
-    .coming-soon-badge {
-        font-size: 1.5em;
-        padding: 8px 20px;
-        margin-bottom: 30px;
-    }
-
-    .flip-clock {
-        margin: 30px auto;
-        flex-wrap: nowrap;
-    }
-
-    .flip-clock__slot {
-        font-size: 0.9em;
-        bottom: -20px;
-    }
-
-    .card {
-        width: 70px;
-        height: 90px;
-        font-size: 2.8em;
-        line-height: 90px;
-    }
-
-    .colon {
-        font-size: 2.8em;
-        line-height: 90px;
-    }
-
-    .invite-btn {
-        padding: 12px 30px;
-        margin: 20px 0;
-        font-size: 1.2em;
-    }
-
-    .contact {
-        margin-top: 30px;
-    }
-
-    #earth {
-        width: clamp(200px, 30vw, 300px);
-        height: clamp(200px, 30vw, 300px);
-        background-size: 600px 300px;
-        box-shadow: inset 20px 0 80px 6px rgba(0, 0, 0, 0.8);
-    }
-
-    #earth:after {
-        box-shadow: -60px 10px 60px 8px rgba(0,0,0,.8) inset;
-    }
-
-    #earth:before {
-        background: radial-gradient(circle at 100px 100px, #fff, #000);
-        opacity: .2;
-    }
-
-    @keyframes rotate {
-        0% { background-position: 0 0; }
-        100% { background-position: 600px 0; }
-    }
-
-    .current-times p {
-        font-size: 1em;
-    }
-}
-
-@media (min-width: 768px) {
-    .container {
-        max-width: 70%;
-    }
-}
-
-@media (min-width: 1024px) {
-    .container {
-        max-width: 600px;
-    }
-}
+    0% { background-position: 0 0;
