@@ -310,6 +310,8 @@ h1 {
         0 4px 6px rgba(0, 0, 0, 0.1), /* Bottom shadow for 3D */
         0 0 10px rgba(255, 102, 0, 0.3),
         0 0 20px rgba(255, 102, 0, 0.2);
+    flex: 1; /* Make buttons same size */
+    max-width: 200px; /* Limit max width for balance */
 }
 
 .invite-btn:hover {
