@@ -236,25 +236,3 @@ locations.forEach(loc => {
     p.textContent = `${loc.flag} ${loc.city}: ${timeString}`;
     timesDiv.appendChild(p);
 });
-
-// Handle login button
-document.getElementById('login-btn').addEventListener('click', function() {
-    document.getElementById('login-modal').style.display = 'flex';
-});
-
-// Handle close modal
-document.querySelector('.close').addEventListener('click', function() {
-    document.getElementById('login-modal').style.display = 'none';
-});
-
-// Handle login form submit
-document.getElementById('login-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    if (username === 'admin' && password === 'password') {
-        window.location.href = 'hidden.html'; // Redirect to hidden page
-    } else {
-        alert('Invalid credentials');
-    }
-});
