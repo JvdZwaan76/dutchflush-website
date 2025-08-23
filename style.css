@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    padding: clamp(20px, 5vh, 50px) 0;
+    padding: clamp(10px, 3vh, 30px) 0;
     font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
@@ -80,8 +80,8 @@ body {
 .container {
     position: relative;
     z-index: 1;
-    max-width: 90%;
-    padding: clamp(20px, 5vw, 30px);
+    max-width: 95%;
+    padding: clamp(15px, 4vw, 25px);
     background: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -99,7 +99,7 @@ body {
 
 h1 {
     font-family: 'Pacifico', cursive;
-    font-size: 3.5em;
+    font-size: clamp(2.5em, 8vw, 3.5em);
     margin-bottom: 10px;
     font-weight: 400;
     color: #ff6600;
@@ -119,13 +119,13 @@ h1 {
 }
 
 .coming-soon-badge {
-    font-size: 1.2em;
+    font-size: clamp(1em, 3vw, 1.2em);
     color: #ff6600;
     background: linear-gradient(145deg, rgba(255, 102, 0, 0.15), rgba(255, 102, 0, 0.05));
     border: 1px solid rgba(255, 102, 0, 0.3);
     border-radius: 20px;
     padding: 5px 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -174,7 +174,7 @@ h1 {
 .flip-clock {
     text-align: center;
     perspective: 1000px;
-    margin: 20px auto;
+    margin: clamp(10px, 3vw, 20px) auto;
     display: flex;
     justify-content: center;
     gap: 5px;
@@ -205,10 +205,10 @@ h1 {
 .card {
     display: block;
     position: relative;
-    width: 60px;
-    height: 80px;
-    font-size: 2.2em;
-    line-height: 80px;
+    width: clamp(50px, 10vw, 60px);
+    height: clamp(70px, 14vw, 80px);
+    font-size: clamp(1.8em, 4vw, 2.2em);
+    line-height: clamp(70px, 14vw, 80px);
     perspective: 1000px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 5px;
@@ -286,8 +286,8 @@ h1 {
 }
 
 .colon {
-    font-size: 2.2em;
-    line-height: 80px;
+    font-size: clamp(1.8em, 4vw, 2.2em);
+    line-height: clamp(70px, 14vw, 80px);
     color: #fff;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
     margin: 0 5px;
@@ -297,12 +297,12 @@ h1 {
     background: linear-gradient(145deg, rgba(255, 102, 0, 0.2), rgba(255, 102, 0, 0.1)); /* 3D gradient */
     border: 2px solid #ff6600;
     color: #fff;
-    padding: 10px 20px;
+    padding: clamp(8px, 2vw, 10px) clamp(15px, 4vw, 20px);
     margin: 15px 0;
     border-radius: 8px;
     cursor: pointer;
     transition: box-shadow 0.3s ease, transform 0.2s ease, background 0.3s ease;
-    font-size: 1em;
+    font-size: clamp(0.9em, 3vw, 1em);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     text-decoration: none;
@@ -323,8 +323,8 @@ h1 {
 }
 
 .contact {
-    margin-top: 20px;
-    font-size: 1em;
+    margin-top: clamp(10px, 2vw, 20px);
+    font-size: clamp(0.8em, 2.5vw, 1em);
     opacity: 0.8;
 }
 
@@ -337,7 +337,7 @@ h1 {
 .globe-wrapper {
     position: relative;
     margin-top: clamp(10px, 2vw, 20px);
-    height: clamp(200px, 40vw, 350px);
+    height: clamp(150px, 30vw, 250px); /* Adjusted for mobile */
 }
 
 #earth {
@@ -345,8 +345,8 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: clamp(150px, 30vw, 300px);
-    height: clamp(150px, 30vw, 300px);
+    width: clamp(120px, 25vw, 300px);
+    height: clamp(120px, 25vw, 300px);
     background: url('https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg') 0 0 repeat-x / 400px 200px;
     border-radius: 50%;
     animation: rotate 20s linear infinite;
@@ -393,17 +393,20 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
     width: 100%;
+    height: 100%;
 }
 
 .current-times p {
-    margin: 5px 0;
-    font-size: 0.9em;
+    margin: clamp(2px, 1vw, 5px) 0;
+    font-size: clamp(0.7em, 2vw, 0.9em);
     opacity: 0.8;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* For readability over globe */
-    max-width: 80%;
+    max-width: 90%;
     text-align: center;
+    white-space: nowrap; /* Prevent wrapping on small screens */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media (min-width: 601px) {
@@ -482,6 +485,7 @@ h1 {
 
     .current-times p {
         font-size: 1em;
+        white-space: normal;
     }
 }
 
