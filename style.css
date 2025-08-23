@@ -607,4 +607,8 @@ h1 {
         width: 90%;
         padding: 20px;
     }
+
+    .flip-clock {
+        margin-bottom: 20px; /* Added extra bottom margin for space between clock and CTAs on mobile */
+    }
 }
