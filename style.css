@@ -609,6 +609,6 @@ h1 {
     }
 
     .flip-clock {
-        margin-bottom: clamp(30px, 6vw, 40px); /* Further increased padding between clock and CTAs on mobile */
+        margin-bottom: clamp(30px, 8vw, 50px); /* Increased for more space between clock and CTAs on mobile */
     }
 }
