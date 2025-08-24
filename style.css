@@ -422,137 +422,113 @@ h1 {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.85); /* Darker overlay for focus */
+    background-color: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
 }
 
 .modal-content {
-    background: rgba(0, 0, 0, 0.65); /* Slightly darker for contrast */
-    padding: clamp(30px, 8vw, 60px); /* Generous padding for elegance */
-    border-radius: 20px; /* Larger radius for a softer look */
-    border: 3px solid #ff6600; /* Thicker border for emphasis */
-    box-shadow: 
-        0 8px 20px rgba(255, 102, 0, 0.5),
-        0 12px 40px rgba(255, 102, 0, 0.4),
-        0 20px 60px rgba(255, 69, 0, 0.3); /* Deeper, more dramatic shadow */
-    width: clamp(280px, 85%, 500px); /* Adjusted range for better fit */
-    max-width: 500px;
+    background: rgba(0, 0, 0, 0.6); /* Matches homepage container background */
+    padding: clamp(25px, 6vw, 40px); /* Adjusted padding for balance */
+    border-radius: 15px;
+    border: 2px solid #ff6600;
+    box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+    width: 80%;
+    max-width: 400px;
     text-align: center;
-    animation: containerFade 0.6s ease-in-out; /* Slightly longer animation */
-    backdrop-filter: blur(15px); /* Stronger blur for immersive effect */
+    animation: containerFade 0.5s ease-in-out;
+    backdrop-filter: blur(10px); /* Consistent mysterious effect */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content vertically and horizontally */
+    align-items: center;
 }
 
 .close {
     color: #fff;
-    position: absolute; /* Positioned absolutely for flexibility */
-    top: 15px;
-    right: 15px;
-    font-size: 36px; /* Larger for better click target */
+    float: right;
+    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    transition: color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    padding: 8px;
-    border-radius: 50%; /* Circular close button */
-    background: rgba(255, 255, 255, 0.1); /* Subtle background */
+    transition: color 0.3s ease;
 }
 
 .close:hover {
     color: #ff6600;
-    transform: scale(1.2); /* Larger hover effect */
-    box-shadow: 0 0 15px rgba(255, 102, 0, 0.5); /* Glow on hover */
 }
 
 .modal-content h2 {
     font-family: 'Pacifico', cursive;
-    font-size: clamp(2em, 7vw, 3.5em); /* Adjusted for prominence */
-    margin-bottom: 30px; /* More space below title */
+    font-size: clamp(1.5em, 5vw, 2.5em);
+    margin-bottom: 20px;
     font-weight: 400;
     color: #ff6600;
-    -webkit-text-stroke: 0.6px #fff; /* Slightly thicker stroke */
-    text-stroke: 0.6px #fff;
+    -webkit-text-stroke: 0.5px #fff;
+    text-stroke: 0.5px #fff;
     text-shadow: 
-        0 0 5px #fff,
+        0 0 2px #fff,
+        0 0 5px #ff6600,
         0 0 10px #ff6600,
         0 0 20px #ff6600,
-        0 0 30px #ff6600,
-        0 0 60px #ff4500; /* Enhanced neon glow */
-    animation: neonGlow 3.5s infinite ease-in-out; /* Slightly longer cycle */
-    letter-spacing: 0.04em; /* Wider spacing for style */
-    text-align: center; /* Ensure centered */
+        0 0 40px #ff4500;
+    animation: neonGlow 3s infinite ease-in-out;
+    letter-spacing: 0.02em;
 }
 
 .modal-content form {
     display: flex;
     flex-direction: column;
-    gap: clamp(30px, 8vw, 40px); /* Increased for balanced spacing */
-    width: 80%; /* Constrain form width for better layout */
-    max-width: 400px; /* Limit form width */
+    gap: clamp(15px, 4vw, 20px);
+    width: 100%;
 }
 
 .modal-content label {
     color: #fff;
     text-align: left;
-    margin-bottom: 12px; /* More space below labels */
-    font-size: clamp(1.1em, 4vw, 1.5em); /* Larger for readability */
-    opacity: 0.95; /* Slightly higher opacity */
-    font-weight: 500; /* Added weight for emphasis */
+    margin-bottom: 5px;
+    font-size: clamp(0.9em, 3vw, 1em);
 }
 
 .modal-content input {
     width: 100%;
-    padding: clamp(16px, 5vw, 22px); /* Increased for touch and aesthetics */
-    border: 3px solid #ff6600; /* Thicker border */
-    border-radius: 15px; /* Larger radius for softness */
-    background: rgba(255, 255, 255, 0.15); /* Lighter for better contrast */
+    padding: 12px;
+    border: 2px solid #ff6600;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    box-shadow: 
-        0 6px 15px rgba(255, 102, 0, 0.4),
-        0 10px 30px rgba(255, 102, 0, 0.3); /* Deeper shadow */
-    transition: box-shadow 0.4s ease, transform 0.3s ease, background 0.3s ease;
-    font-size: clamp(1.1em, 4vw, 1.5em);
-    outline: none;
-    text-align: center; /* Centered text for symmetry */
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    font-size: clamp(0.9em, 3vw, 1em);
 }
 
 .modal-content input:focus {
-    box-shadow: 
-        0 8px 25px rgba(255, 102, 0, 0.7),
-        0 12px 45px rgba(255, 69, 0, 0.5);
-    transform: translateY(-4px); /* More pronounced lift */
-    background: rgba(255, 255, 255, 0.2); /* Lighter on focus */
-    border-color: #ff4500; /* Slightly darker border on focus */
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+    transform: translateY(-2px);
 }
 
 .modal-content button {
     width: 100%;
-    padding: clamp(16px, 5vw, 22px); /* Increased for consistency */
-    margin-top: 30px; /* More space above button */
-    background: linear-gradient(145deg, rgba(255, 102, 0, 0.3), rgba(255, 102, 0, 0.15));
-    border: 3px solid #ff6600; /* Thicker border */
-    border-radius: 15px; /* Larger radius for softness */
+    padding: 12px;
+    margin-top: 15px;
+    background: linear-gradient(145deg, rgba(255, 102, 0, 0.2), rgba(255, 102, 0, 0.1));
+    border: 2px solid #ff6600;
+    border-radius: 8px;
     color: #fff;
     cursor: pointer;
-    transition: box-shadow 0.4s ease, transform 0.3s ease, background 0.3s ease;
-    font-size: clamp(1.1em, 4vw, 1.5em);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    font-size: clamp(0.9em, 3vw, 1em);
     text-transform: uppercase;
-    letter-spacing: 2px; /* Wider for dramatic effect */
+    letter-spacing: 1.5px;
     box-shadow: 
-        0 6px 15px rgba(0, 0, 0, 0.2),
-        0 8px 25px rgba(255, 102, 0, 0.4),
-        0 12px 40px rgba(255, 102, 0, 0.3); /* Enhanced shadow */
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 0 10px rgba(255, 102, 0, 0.3);
 }
 
 .modal-content button:hover {
-    background: linear-gradient(145deg, rgba(255, 102, 0, 0.45), rgba(255, 102, 0, 0.25));
+    background: linear-gradient(145deg, rgba(255, 102, 0, 0.3), rgba(255, 102, 0, 0.2));
     box-shadow: 
-        inset 0 4px 8px rgba(0, 0, 0, 0.25),
-        0 10px 35px rgba(255, 102, 0, 0.6),
-        0 15px 60px rgba(255, 69, 0, 0.4);
-    transform: translateY(-5px) scale(1.08); /* Enhanced hover effect */
+        inset 0 2px 4px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(255, 102, 0, 0.4);
+    transform: translateY(-3px) scale(1.05);
 }
 
 @media (min-width: 601px) {
