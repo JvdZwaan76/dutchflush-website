@@ -90,6 +90,8 @@ body {
         0 0 20px rgba(255, 102, 0, 0.2),
         0 0 30px rgba(255, 69, 0, 0.1);
     animation: containerFade 3s ease-in-out;
+    margin: 0 auto; /* Center the container horizontally */
+    width: clamp(300px, 90%, 600px); /* Ensure consistent width and centering */
 }
 
 @keyframes containerFade {
@@ -642,6 +644,7 @@ h1 {
         justify-content: center; /* Center the column */
         align-items: center; /* Center buttons horizontally */
         margin: 0 auto; /* Center within container */
+        width: 100%; /* Ensure full width for centering */
     }
 
     .invite-btn {
