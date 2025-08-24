@@ -596,11 +596,13 @@ h1 {
         flex-direction: column;
         gap: 15px; /* Increased gap for better balance */
         padding: 0 10px; /* Added horizontal padding */
+        align-items: center; /* Center buttons horizontally in column mode */
     }
 
     .invite-btn {
         width: 100%;
         padding: 10px;
+        max-width: none; /* Remove max-width on mobile for full width */
     }
 
     .modal-content {
