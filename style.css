@@ -429,18 +429,18 @@ h1 {
 
 .modal-content {
     background: rgba(0, 0, 0, 0.6); /* Matches homepage container background */
-    padding: clamp(25px, 6vw, 40px); /* Adjusted padding for balance */
+    padding: clamp(25px, 6vw, 50px); /* Increased padding for better spacing */
     border-radius: 15px;
     border: 2px solid #ff6600;
-    box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
-    width: 80%;
-    max-width: 400px;
+    box-shadow: 
+        0 0 15px rgba(255, 102, 0, 0.4),
+        0 0 30px rgba(255, 102, 0, 0.3),
+        0 0 45px rgba(255, 69, 0, 0.2); /* Enhanced shadow for depth */
+    width: clamp(300px, 80%, 450px); /* Responsive width matching homepage */
+    max-width: 450px;
     text-align: center;
     animation: containerFade 0.5s ease-in-out;
-    backdrop-filter: blur(10px); /* Consistent mysterious effect */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    backdrop-filter: blur(12px); /* Slightly stronger blur for effect */
 }
 
 .close {
