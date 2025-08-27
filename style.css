@@ -441,6 +441,8 @@ h1 {
     text-align: center;
     animation: containerFade 0.5s ease-in-out;
     backdrop-filter: blur(12px); /* Slightly stronger blur for effect */
+    max-height: 80vh; /* Prevent cut-off on mobile */
+    overflow-y: auto; /* Scroll if content exceeds height */
 }
 
 .close {
@@ -663,41 +665,4 @@ h1 {
     .flip-clock {
         margin-bottom: clamp(30px, 8vw, 50px); /* Increased for more space between clock and CTAs on mobile */
     }
-}
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(rgba(30, 58, 95, 0.3), rgba(30, 58, 95, 0.5));
-    z-index: 1;
-    pointer-events: none; /* Add this line to allow clicks through */
-}
-
-.hero-play-button {
-    z-index: 10 !important; /* Ensure button is above overlay */
-    pointer-events: all !important;
-}
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(rgba(30, 58, 95, 0.3), rgba(30, 58, 95, 0.5));
-    z-index: 1;
-    pointer-events: none; /* Allow clicks through */
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2; /* Keep hero text above overlay but below button */
-    max-width: 900px;
-    padding: 0 2rem;
-}
-
-.hero-play-button {
-    z-index: 100 !important; /* Put button above everything */
-    pointer-events: all !important;
 }
