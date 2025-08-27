@@ -664,3 +664,18 @@ h1 {
         margin-bottom: clamp(30px, 8vw, 50px); /* Increased for more space between clock and CTAs on mobile */
     }
 }
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(30, 58, 95, 0.3), rgba(30, 58, 95, 0.5));
+    z-index: 1;
+    pointer-events: none; /* Add this line to allow clicks through */
+}
+
+.hero-play-button {
+    z-index: 10 !important; /* Ensure button is above overlay */
+    pointer-events: all !important;
+}
